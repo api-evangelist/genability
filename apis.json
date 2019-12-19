@@ -1,0 +1,94 @@
+{
+    "name": "Genability",
+    "description": "Genability delivers the most accurate savings information for providers and consumers of solar, energy storage, electric vehicles and smart appliances.",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/206-genability-api.jpg",
+    "tags": [
+        "api provider",
+        "energy",
+        "have api",
+        "target"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/genability\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Genability",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/206-genability-api.jpg",
+            "humanURL": "http:\/\/genability.com\/",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/genability-openapi.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Base",
+            "url": "http:\/\/api.genability.com"
+        },
+        {
+            "type": "Blog",
+            "url": "http:\/\/blog.genability.com"
+        },
+        {
+            "type": "Blog RSS",
+            "url": "http:\/\/blog.genability.com\/feed\/"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/genability"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "http:\/\/www.crunchbase.com\/company\/genability"
+        },
+        {
+            "type": "Developers",
+            "url": "http:\/\/developer.genability.com\/"
+        },
+        {
+            "type": "Email",
+            "url": "support@genability.com"
+        },
+        {
+            "type": "Email",
+            "url": "jobs@genability.com"
+        },
+        {
+            "type": "Email",
+            "url": "sales@genability.com"
+        },
+        {
+            "type": "Email",
+            "url": "info@genability.com"
+        },
+        {
+            "type": "Email",
+            "url": "privacy@genability.com"
+        },
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/Genability"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/genability"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/genabilityapi"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/genability.com\/"
+        }
+    ]
+}
