@@ -1,0 +1,112 @@
+# Arcadia Documentation
+
+> Documentation for Arcadia
+
+## Guides
+- [Welcome to Signal](https://docs.arcadia.com/v2022-12-21-Signal/docs/welcome-to-signal.md): Start with Signal basics, choose a common workflow, and find the API reference resources you need.
+- [Quick Start](https://docs.arcadia.com/v2022-12-21-Signal/docs/quick-start.md): Get your Arcadia credentials, make an authenticated request, and retrieve utility data with your first Arcadia Signal API calls.
+- [API Reference Introduction](https://docs.arcadia.com/v2022-12-21-Signal/docs/api-reference-overview.md): Find Signal REST API endpoints, data structures, and examples organized by resource type.
+- [Rate Limit Best Practices](https://docs.arcadia.com/v2022-12-21-Signal/docs/rate-limit-best-practices.md): Plan request concurrency, gradual ramp-up, and monitoring for Signal API workflows.
+- [Common Workflows](https://docs.arcadia.com/v2022-12-21-Signal/docs/common-workflows.md): Choose a guided Signal workflow for utility and tariff discovery, calculations, rates, usage modeling, or integrations.
+- [Task Guides](https://docs.arcadia.com/v2022-12-21-Signal/docs/task-guides.md): Jump directly to specific Signal task guides for utility lookup, tariff search, calculations, rates, usage estimation, and integrations.
+- [Find Utilities and Tariffs](https://docs.arcadia.com/v2022-12-21-Signal/docs/find-utilities-and-tariffs.md): Identify a customer's utility, find eligible tariffs, and refine tariff results for residential, commercial, and industrial customers.
+- [Find Your Customer's Utility](https://docs.arcadia.com/v2022-12-21-Signal/docs/find-customer-utility.md): Learn how to determine your customer's utility using Arcadia's API. Search by postal code, utility name, or code to find Load Serving Entities across the USA, Canada, and Mexico.
+- [Tariff Identification Workflow](https://docs.arcadia.com/v2022-12-21-Signal/docs/tariff-identification-workflow.md): Follow the recommended sequence to identify a customer’s utility, search for likely tariffs, and refine tariff results.
+- [Search for a Customer’s Tariff](https://docs.arcadia.com/v2022-12-21-Signal/docs/search-customer-tariff.md): Search for likely customer tariffs using location, service type, customer class, tariff type, and effective date filters.
+- [When the List of Tariffs is Longer](https://docs.arcadia.com/v2022-12-21-Signal/docs/when-the-list-of-tariffs-is-longer.md): Learn advanced methods to refine and filter longer lists of tariffs returned by the API using sorting parameters and tariff code searches.
+- [Searching for a General Tariff](https://docs.arcadia.com/v2022-12-21-Signal/docs/search-general-tariffs.md): Learn how to search and filter for General tariffs that cover commercial and industrial electricity users, including consumption and demand size filtering.
+- [Advanced Tariff Filtering](https://docs.arcadia.com/v2022-12-21-Signal/docs/advanced-tariff-filtering.md): Learn advanced techniques for filtering tariffs by eligibility requirements, rate characteristics, and enrollment status to help customers find the right energy plans.
+- [Baseline Regions](https://docs.arcadia.com/v2022-12-21-Signal/docs/baseline-regions.md): Identify tariffs with baseline regions and choose the correct territoryId for rate calculations.
+- [Run Calculations](https://docs.arcadia.com/v2022-12-21-Signal/docs/run-calculations.md): Match bills, calculate costs, estimate usage, and inspect the details returned by Signal calculation APIs.
+- [Improving Calculation Accuracy with Rate Criteria Properties](https://docs.arcadia.com/v2022-12-21-Signal/docs/rate-criteria-properties.md): This guide explains the importance of being explicit about billing rate criteria properties to enhance calculation precision. Learn when to use them effectively and how to determine their relevance for your specific scenarios.
+- [Determine System Peak Demand](https://docs.arcadia.com/v2022-12-21-Signal/docs/determine-system-peak-demand.md): Determine whether a tariff has System Peak Demand charges, pass the customer's value to the calculator, or estimate the value from interval meter data.
+- [Calculation Results Detail Level and Group By](https://docs.arcadia.com/v2022-12-21-Signal/docs/calculation-results-detail-level-group-by.md): Control how calculation line items are returned by setting detailLevel for cost granularity and groupBy for time granularity.
+- [Net Metering vs Net Billing Tariff Calculations](https://docs.arcadia.com/v2022-12-21-Signal/docs/net-metering-vs-net-billing.md): Choose the right calculation input pattern for net metering and net billing tariffs by understanding how imports, exports, and transaction types are modeled.
+- [Run a Calculation to Match a Bill](https://docs.arcadia.com/v2022-12-21-Signal/docs/match-utility-bill.md): Reproduce a customer's historical utility bill by selecting the right tariff, running an on-demand calculation, and calibrating calculation inputs.
+- [Run a Calculation with Arcadia's Typical Baseline](https://docs.arcadia.com/v2022-12-21-Signal/docs/run-a-calculation-with-arcadias-typical-baseline.md): This page walks through a common use case where a user needs to leverage Arcadia's synthetic building based load curves for what-if analyses in Signal's On-Demand Cost Calculation API
+- [Turn Bills into kWh](https://docs.arcadia.com/v2022-12-21-Signal/docs/turn-bills-into-kwh.md): Estimate energy usage from electricity bills using Bill Solve in the On-Demand Cost Calculator API.
+- [Work with Rates and Charges](https://docs.arcadia.com/v2022-12-21-Signal/docs/work-with-rates-and-charges.md): Understand, modify, and interpret the rates and charges used in Signal calculations.
+- [Handle Taxes](https://docs.arcadia.com/v2022-12-21-Signal/docs/handle-taxes.md): Add utility taxes to calculation requests when the tax is not already modeled from a utility rate book.
+- [Handle Tiered Rates](https://docs.arcadia.com/v2022-12-21-Signal/docs/handle-tiered-rates.md): Identify fixed and variable tiered rates in tariff rate bands so you can display tier information or map tiers to your own tariff database.
+- [User-Adjusted Rates](https://docs.arcadia.com/v2022-12-21-Signal/docs/user-adjusted-rates.md): Add custom charges to a calculation by passing user-adjusted rates in the rateInputs array.
+- [Contracted Rates](https://docs.arcadia.com/v2022-12-21-Signal/docs/contracted-rates.md): Model third-party supply charges in deregulated markets by passing contracted rates in calculation rateInputs.
+- [Block and Index Contracted Rates](https://docs.arcadia.com/v2022-12-21-Signal/docs/block-and-index-contracted-rates.md): Model contracted supply rates with fixed blocks, indexed pricing, time-of-use definitions, and sellback provisions.
+- [Contracted Rate Intervals](https://docs.arcadia.com/v2022-12-21-Signal/docs/contracted-rate-intervals.md): Apply contracted rates to explicit time intervals by adding fromDateTime and toDateTime values to each contracted rate object.
+- [Forecasted Rates](https://docs.arcadia.com/v2022-12-21-Signal/docs/forecasted-rates.md): Use forecasted rates for forward-looking utility cost calculations that account for expected seasonal and rate changes.
+- [Understanding Rate Polarity](https://docs.arcadia.com/v2022-12-21-Signal/docs/rate-polarity.md): Understand how rate polarity determines whether a rate is treated as a charge or credit in tariff modeling and calculation results.
+- [Understanding Formulas](https://docs.arcadia.com/v2022-12-21-Signal/docs/formulas.md): Use formula properties to understand how Arcadia calculates derived tariff values such as billing factors, demand values, and tier limits.
+- [Usage and Modeling](https://docs.arcadia.com/v2022-12-21-Signal/docs/usage-and-modeling.md): Estimate and model customer usage when you do not have direct meter data or complete usage history.
+- [Integration Guides](https://docs.arcadia.com/v2022-12-21-Signal/docs/integration-guides.md): Connect Signal API behavior to your product, operations, and internal tools.
+- [Spike Limiter Implementation](https://docs.arcadia.com/v2022-12-21-Signal/docs/spike-limiter.md): Use the spike limiter guidance to identify request spikes, respond to HTTP 429 errors, and keep API traffic predictable.
+- [Single Sign On (SSO)](https://docs.arcadia.com/v2022-12-21-Signal/docs/single-sign-on.md)
+- [Show Utility Logos](https://docs.arcadia.com/v2022-12-21-Signal/docs/show-utility-logos.md): Access standardized utility logos through Genability's CDN using simple URL structures, with automatic fallback to generic icons when specific logos aren't available.
+- [Term Glossary](https://docs.arcadia.com/v2022-12-21-Signal/docs/glossary.md): Definitions for Arcadia, API, tariff, calculation, rate, and energy-industry terms used throughout the Signal documentation.
+
+## API Reference
+- [Getting Started](https://docs.arcadia.com/v2022-12-21-Signal/reference/api-basics.md): Find the Arcadia Signal REST API page you need, including authentication, requests, responses, testing tools, and API families.
+- [Authentication](https://docs.arcadia.com/v2022-12-21-Signal/reference/authentication.md): Learn how to authenticate with the Arcadia API using HTTP Basic authentication with your appId and appKey credentials.
+- [Requests](https://docs.arcadia.com/v2022-12-21-Signal/reference/requests.md): Complete guide to making requests to the Arcadia Signal API, including URL patterns, authentication, data types, HTTP methods, and advanced features like pagination and searching.
+- [Responses](https://docs.arcadia.com/v2022-12-21-Signal/reference/responses.md): Learn about API response formats, HTTP status codes, response payload structure, and error handling in our REST API.
+- [Dates and Times](https://docs.arcadia.com/v2022-12-21-Signal/reference/dates-times.md): Learn about supported date and time formats, including ISO 8601 standards, defaulting behavior, time zones, and date periods for API requests.
+- [Testing & Debugging Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-summary.md): Echo APIs provide simple validation and testing methods to help you get started with the Arcadia platform and debug your API integrations. Use these endpoints to validate credentials, test data formats, and simulate error responses.
+- [Echo Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/echo.md): Validate how you are calling the Arcadia APIs and debug request formatting, authentication, and input values.
+- [Echo Hello](https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-api-hello.md): Return a Hello World response when the passed-in credentials are valid or an unauthorized response when they are invalid.
+- [Simulate Errors](https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-api-errors.md): Simulate possible error messages to test how your application responds to API errors.
+- [Validate Authentication](https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-api-authenticate.md): Quickly validate the appId and appKey you are using. A successful response indicates they are valid.
+- [Validate Input Formats](https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-api-validate.md): Validate whether an input value is in a valid and recognized format, including dates, times, integers, and arrays.
+- [Tools and Libraries](https://docs.arcadia.com/v2022-12-21-Signal/reference/tools-libraries.md): Explore our development tools and client libraries including REST clients, Java, PHP, and Ruby libraries to help you integrate with our APIs effectively.
+- [Versioning and Releases](https://docs.arcadia.com/v2022-12-21-Signal/reference/versioning-releases.md): Learn about Arcadia Signal API versioning, including version numbers and the meaning of Alpha, Beta, and Gamma designations for data structures and operations.
+- [Load Serving Entities (LSEs)](https://docs.arcadia.com/v2022-12-21-Signal/reference/load-serving-entities-lses.md): Learn how Load Serving Entities model utilities, service types, ownership, and billing period representation.
+- [List LSEs](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-lses.md): Return a full or filtered list of Load Serving Entities (LSEs).
+- [Get LSE by ID](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-one-lse.md): Return one Load Serving Entity (LSE) by lseId.
+- [Territories Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/territory.md): Learn how territories model service areas, tariff territories, baseline regions, and utility climate zones.
+- [List Territories](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-territories.md): Return a full or filtered list of Territories.
+- [Get Territory by ID](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-one-territory.md): Return a Territory with the corresponding territoryId.
+- [Tariffs Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/tariff.md): Learn how tariffs, tariff rates, tariff rate bands, documents, and tariff properties are modeled.
+- [List Tariffs](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-tariff.md): Return tariffs matching the provided filters.
+- [Tariff History Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/tariff-history.md): Learn how tariff versions, rider versions, and lookup variable rates are modeled over time.
+- [Get Tariff History](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-tariff-history.md): Return a complete history of tariff revisions for a given masterTariffId.
+- [Tariff & Rate Components Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/tariff-rate-components-overview.md): Find API pages for calendars, properties, seasons, and Time of Use data.
+- [Properties Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/properties.md): Learn how Property Keys model tariff applicability, calculation inputs, choices, formulas, lookup-backed values, and demand-related fields.
+- [List Properties](https://docs.arcadia.com/v2022-12-21-Signal/reference/properties-api.md): Return a list of Property Keys and sub-property keys based on search criteria.
+- [Get Property by Key](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-one-property.md): Return one Property Key by keyName.
+- [Calendars Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/calendar.md): Learn how calendars model billing dates, holiday schedules, pricing period events, and calendar dates.
+- [List Calendar Dates](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-calendar-dates.md): Return actual dates for calendar events, filtered by calendar, utility, locale, date range, event type, or date definition type.
+- [Get Calendar by ID](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-one-calendar.md): Return one Calendar and its event definitions by calendarId.
+- [List Calendars](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-calendars.md): Return full or filtered calendar definitions for a utility, including holiday, billing, and pricing period calendars.
+- [Seasons Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/season.md): Learn how seasons and season groups model parts of the year that can use different rate amounts.
+- [List Season Groups](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-season.md): Return a list of season groups for a given LSE.
+- [Time of Use (TOU) Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/time-of-use-tou.md): Learn how Time of Use groups, definitions, periods, and intervals model times when tariff rate prices can differ.
+- [Get TOU Group](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-tou-group.md): Return a Time of Use group by lseId and touGroupId.
+- [Get TOU by ID](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-tou.md): Return a single Time of Use definition by touId.
+- [List TOU Intervals](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-tou-intervals.md): Return intervals for a specific Time of Use definition by touId.
+- [List TOU Group Intervals](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-tou-group-intervals.md): Return intervals for a Time of Use group by lseId and touGroupId.
+- [Create Private TOU Definition](https://docs.arcadia.com/v2022-12-21-Signal/reference/add-private-tou.md): Creating a private TOU definition requires special API permissions. Contact platformsupport@arcadia.com to request access.
+- [Calculations Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/calculation-apis.md): Calculate electricity costs on demand for specific tariffs, time ranges, and kWh values or arrays.
+- [Cost Calculation Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/on-demand-cost-calculations.md): Calculate electricity costs on demand for a specific tariff, time range, and usage inputs.
+- [Calculate Cost](https://docs.arcadia.com/v2022-12-21-Signal/reference/calculate.md): Run one on-demand cost calculation for a tariff, date range, and calculation inputs.
+- [Mass Calculation Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/on-demand-mass-calculation.md): Run multiple on-demand calculation scenarios in one request.
+- [Calculate Multiple Scenarios](https://docs.arcadia.com/v2022-12-21-Signal/reference/mass-calculate.md): Run multiple on-demand calculation scenarios in one request.
+- [Smart Price Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/smart-price.md): Learn how Smart Price returns marginal pricing for a location or tariff over a specified time window.
+- [Get Smart Price](https://docs.arcadia.com/v2022-12-21-Signal/reference/smart-price-api.md): Retrieve marginal pricing for a location or tariff over a specified time window.
+- [Typical Baseline Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/typical-baseline.md): Learn how typical baseline data is modeled for residential and commercial building usage profiles.
+- [Get Best Typical Baseline](https://docs.arcadia.com/v2022-12-21-Signal/reference/typical-baseline-api.md): Retrieve the baseline that best fits the provided location, building type, and optional building details.
+- [ZIP Codes Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/zip-code.md): Learn how ZIP code metadata is modeled for city, county, latitude, longitude, time zone, and display workflows.
+- [Get ZIP Code Details](https://docs.arcadia.com/v2022-12-21-Signal/reference/zip-code-api.md): Retrieve details for a ZIP code, including city, county, latitude, longitude, and time zone information.
+- [Lookups Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/lookups.md): Learn how lookup tables are modeled for Property Keys with large datasets or frequently changing values.
+- [List Lookup Values](https://docs.arcadia.com/v2022-12-21-Signal/reference/get-lookups.md): Return lookup table values for a LOOKUP Property Key.
+- [Get Lookup Stats](https://docs.arcadia.com/v2022-12-21-Signal/reference/lookup-stats-api.md): Return summary statistics for a LOOKUP Property Key.
+- [Organization Usage Overview](https://docs.arcadia.com/v2022-12-21-Signal/reference/organization-usage.md): Learn how organization usage responses and usage fields are modeled for month-to-date API usage statistics.
+- [Get Organization Usage](https://docs.arcadia.com/v2022-12-21-Signal/reference/organization-usage-api.md): Retrieve month-to-date API usage statistics for your organization.
+
+## Changelog
+- [[Plug] New Providers - June 2026](https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-new-providers-june-2026.md)
+- [[Plug] Extraction Bug Fixes - June 2026](https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-extraction-bug-fixes-june-2026.md)
+- [[Plug] New Providers - May 2026](https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-new-providers-may-2026.md)
+- [[Plug] Extraction Bug Fixes - May 2026](https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-extraction-bug-fixes-may-2026.md)
+- [[Plug] New Providers - April 2026](https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-new-providers-april-2026.md)
+- [[Plug] Extraction Bug Fixes - April 2026](https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-extraction-bug-fixes-april-2026.md)
+- [[Plug] New Providers - March 2026](https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-new-providers-march-2026.md)
+- [[Plug] Extraction Bug Fixes - March 2026](https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-extraction-bug-fixes-march-2026.md)
+- [Plug: Improved full-page capture and general rendering reliability.](https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-improved-full-page-capture-and-general-rendering-reliability.md)
+- [[Plug] Token Storage - PSEG Long Island](https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-token-storage-pseg-long-island.md)

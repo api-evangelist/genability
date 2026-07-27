@@ -1,0 +1,151 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://docs.arcadia.com/v2022-12-21-Signal/reference/responses and
+  https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-api-errors (HTTP
+  200, 2026-07-27), derived against the 4xx/5xx responses in
+  openapi/genability-signal-openapi.json and a live anonymous probe of
+  https://api.genability.com
+format: proprietary-envelope
+rfc9457: false
+summary: >-
+  Signal does not use RFC 9457 problem+json. Every error — protocol or
+  application — is returned in the same JSON wrapper as a success, with
+  status="error", type="Error" and one Error object per problem in results[].
+  There is no published enumeration of error `code` values; the codes below are
+  the ones Genability publishes in its reference examples, its Simulate Errors
+  endpoint, and the live 401 the API returns anonymously.
+envelope:
+  content_type: application/json
+  fields:
+    status: error
+    count: number of Error objects in results
+    type: Error
+    results: array of Error objects
+  error_object:
+    code: Unique string identifying the error type.
+    message: Localized, user-readable message describing the error.
+    objectName: Object type related to the error.
+    propertyName: Object property related to the error.
+  example: |-
+    {
+      "status": "error",
+      "count": 2,
+      "type": "Error",
+      "results": [
+        {
+          "code": "NotNull",
+          "message": "An appKey must be supplied",
+          "objectName": "requestSignature",
+          "propertyName": "appKey"
+        },
+        {
+          "code": "NotNull",
+          "message": "An appId must be supplied",
+          "objectName": "requestSignature",
+          "propertyName": "appId"
+        }
+      ]
+    }
+http_status_codes:
+- status: 200
+  title: OK
+  description: The request was processed and returned successfully.
+- status: 201
+  title: Created
+  description: The new resource was created successfully.
+- status: 400
+  title: Bad Request
+  description: Problem with the request, such as a missing, invalid, or type-mismatched parameter.
+  remediation: Validate inputs with GET /rest/echo/validate before retrying.
+- status: 401
+  title: Unauthorized
+  description: The request did not include valid authorization credentials.
+  remediation: Send appId/appKey as HTTP Basic credentials; validate with GET /rest/echo/authenticate.
+- status: 403
+  title: Forbidden
+  description: Access denied to private data, or the rate limit was exceeded.
+- status: 404
+  title: Not Found
+  description: The URL is incorrect, or the requested resource does not exist.
+- status: 429
+  title: Too Many Requests
+  description: >-
+    Returned by the dynamic spike limiter when the request rate exceeds the
+    organization's computed RPM limit.
+  headers: [Retry-After]
+  remediation: Honour Retry-After, then reduce concurrency and ramp up over 8-10 minutes.
+  source: https://docs.arcadia.com/v2022-12-21-Signal/docs/spike-limiter
+  note: >-
+    Documented in the Spike Limiter guide but NOT listed in the Responses status
+    table and not present in any OpenAPI response — an upstream contract gap.
+- status: 500
+  title: Server Error
+  description: A problem occurred while handling the request.
+- status: 503
+  title: Service Unavailable
+  description: The API is temporarily unavailable.
+problems:
+- code: Unauthorized
+  status: 401
+  message: The credentials were not supplied or are invalid
+  objectName: requestSignature
+  propertyName: appId
+  evidence: >-
+    Live anonymous GET https://api.genability.com/rest/public/tariffs on
+    2026-07-27 returned this envelope verbatim.
+- code: NotNull
+  status: 400
+  message: An appId must be supplied
+  objectName: requestSignature
+  propertyName: appId
+  source: https://docs.arcadia.com/v2022-12-21-Signal/reference/responses
+- code: NotNull
+  status: 400
+  message: An appKey must be supplied
+  objectName: requestSignature
+  propertyName: appKey
+  source: https://docs.arcadia.com/v2022-12-21-Signal/reference/responses
+- code: '301'
+  status: 301
+  message: Moved Permanently
+  objectName: http
+  source: >-
+    openapi/genability-signal-openapi.json#echo-api-errors (301 response
+    example)
+- code: '400'
+  status: 400
+  message: Bad Request
+  objectName: http
+  source: openapi/genability-signal-openapi.json#echo-api-errors
+- code: '403'
+  status: 403
+  message: Forbidden
+  objectName: http
+  source: openapi/genability-signal-openapi.json#echo-api-errors
+- code: '404'
+  status: 404
+  message: Not Found
+  objectName: http
+  source: openapi/genability-signal-openapi.json#echo-api-errors
+- code: '500'
+  status: 500
+  message: Server Error
+  objectName: http
+  source: openapi/genability-signal-openapi.json#echo-api-errors
+spec_coverage:
+  operations_total: 33
+  operations_with_4xx_response: 32
+  documented_response_codes_in_spec: ['200', '301', '400', '403', '404', '500']
+  note: >-
+    Only the Simulate Errors operation (echo-api-errors) declares the full
+    301/400/403/404/500 set; the other 31 operations declare 200 and 400 only,
+    and one (echo) declares no responses at all. 401, 429 and 503 are documented
+    in prose but absent from the machine-readable contract.
+testing:
+  simulate_endpoint: GET /rest/echo/errors?errorCode={200|301|400|403|404|500}
+  docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-api-errors
+  note: >-
+    Genability publishes a live error simulator — an agent can exercise its
+    error handling against real Signal responses before touching priced
+    endpoints. See sandbox/genability-sandbox.yml.

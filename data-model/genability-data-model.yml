@@ -1,0 +1,156 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  openapi/genability-signal-openapi.json (paths, path/query id parameters,
+  response examples) cross-read against the Signal object-reference pages
+  indexed in https://docs.arcadia.com/v2022-12-21-Signal/llms.txt
+summary: >-
+  The Signal OpenAPI declares NO components.schemas — the contract is 33 hand-
+  authored operations with inline response examples — so the entity graph below
+  is derived from the resource paths, the id-bearing parameters that link them,
+  and the `type` value each endpoint returns in the response envelope. Signal's
+  model is a reference-data graph rooted at the Load Serving Entity (utility):
+  an LSE serves Territories and offers Tariffs; a Tariff is versioned over time,
+  scoped to a Territory, priced by Rates that reference TOU definitions,
+  Seasons, Calendars and typed Property Keys; a Calculation binds a Master
+  Tariff to caller-supplied usage inputs.
+identifier_conventions:
+  style: numeric surrogate ids, no prefixes
+  keys:
+  - {name: lseId, entity: LoadServingEntity, example: 2756}
+  - {name: masterTariffId, entity: Tariff, note: stable across effective-dated tariff versions, example: 512}
+  - {name: tariffId, entity: TariffVersion, note: identifies one effective-dated version of a master tariff}
+  - {name: territoryId, entity: Territory}
+  - {name: touGroupId, entity: TimeOfUseGroup, scope: unique within an LSE}
+  - {name: touId, entity: TimeOfUse}
+  - {name: calendarId, entity: Calendar}
+  - {name: seasonGroupId, entity: SeasonGroup}
+  - {name: keyName, entity: PropertyKey, note: string key, not numeric}
+  - {name: utilityTaxId, entity: UtilityTax}
+  - {name: zipCode, entity: ZipCode, note: natural key}
+entities:
+- name: LoadServingEntity
+  aka: LSE, utility
+  description: An investor-owned utility, municipal utility or cooperative serving electricity in the USA, Canada or Mexico.
+  id: lseId
+  operations: [get-lses, get-one-lse]
+  path: /rest/public/lses
+  example_fields: [lseId, name, code, websiteHome]
+- name: Tariff
+  description: A rate schedule offered by an LSE, identified by masterTariffId and effective-dated into versions.
+  id: masterTariffId
+  operations: [get-tariff, get-tariff-1, get-tariff-history]
+  path: /rest/public/tariffs
+- name: TariffVersion
+  description: One effective-dated revision of a master tariff, returned by the tariff history endpoint.
+  operations: [get-tariff-history]
+  path: /rest/public/tariffs/{masterTariffId}/history
+- name: TariffRate
+  description: A charge or credit line within a tariff, inlined when populateRates=true; carries rate bands, tiers and polarity.
+  operations: [get-tariff, get-tariff-1]
+  inline_only: true
+- name: Territory
+  description: Service, baseline, climate or tariff-applicability geography used to scope which rates apply to a premise.
+  id: territoryId
+  operations: [territory-1, get-one-territory]
+  path: /rest/public/territories
+- name: SeasonGroup
+  description: The seasonal definitions an LSE applies when a tariff prices summer and winter usage differently.
+  operations: [get-season]
+  path: /rest/public/seasons
+- name: TimeOfUseGroup
+  description: A named set of time-of-use definitions belonging to an LSE.
+  id: touGroupId
+  operations: [get-tou-group, get-tou-group-intervals]
+  path: /rest/public/timeofuses/{lseId}/{touGroupId}
+- name: TimeOfUse
+  description: One TOU definition (e.g. On Peak, Off Peak) and its interval schedule.
+  id: touId
+  operations: [get-tou, get-tou-intervals, tou-api-copy-3]
+  path: /rest/public/timeofuses/{touId}
+- name: Calendar
+  description: Holiday and special-day schedule determining which rate periods apply on a given date.
+  id: calendarId
+  operations: [get-calendars, get-one-calendar, get-calendar-dates]
+  path: /rest/public/calendars/
+- name: CalendarDate
+  description: An actual dated event within a calendar, filterable by calendar, LSE, locale, date range and event type.
+  operations: [get-calendar-dates]
+  path: /rest/public/calendars/dates
+- name: PropertyKey
+  description: A typed input a tariff calculation accepts (consumption, demand, buildingType, ...), with dataType, family and keySpace.
+  id: keyName
+  operations: [properties-api, get-one-property, get-lookups, lookup-stats-api]
+  path: /rest/public/properties
+- name: LookupValue
+  description: A permitted value for a LOOKUP-typed Property Key, with summary statistics.
+  operations: [get-lookups, lookup-stats-api]
+  path: /rest/public/properties/{keyName}/lookups
+- name: UtilityTax
+  description: A tax applied to an electricity bill by jurisdiction, so a modeled bill reflects taxes actually paid.
+  id: utilityTaxId
+  operations: [get-utility-taxes, get-one-utility-tax]
+  path: /rest/v1/utilitytaxes
+- name: TypicalBaseline
+  description: A modeled hourly or monthly load profile fitted to a location and building type when real interval data is unavailable.
+  operations: [typical-baseline-api]
+  path: /rest/v1/typicals/baselines/best
+- name: ZipCode
+  description: ZIP/postal code detail — city, county, latitude, longitude, time zone — and the utilities and territories serving it.
+  id: zipCode
+  operations: [zip-code-api]
+  path: /rest/public/zipcodes/{zipCode}
+- name: Calculation
+  description: An on-demand priced result for a masterTariffId over a date range with propertyInputs; returns cost line items.
+  operations: [calculate, mass-calculate]
+  path: /rest/v1/ondemand/calculate
+  request_required_fields: [masterTariffId, fromDateTime, toDateTime, propertyInputs]
+- name: CalculationScenario
+  description: One named scenario in a mass calculation request, priced alongside the others in a single call.
+  operations: [mass-calculate]
+  request_required_fields: [fromDateTime, toDateTime, scenarios]
+- name: SmartPrice
+  description: A single blended price signal ($/kWh) for a utility, tariff and time window.
+  operations: [smart-price-api]
+  path: /rest/v1/prices/smart
+- name: OrganizationUsage
+  description: Month-to-date Signal API consumption for your organization, optionally aggregated and including child orgs.
+  operations: [product-usage-data]
+  path: /rest/v1/orgs/usage
+relationships:
+- {from: LoadServingEntity, to: Tariff, type: has_many, via: lseId}
+- {from: LoadServingEntity, to: Territory, type: has_many, via: lseId}
+- {from: LoadServingEntity, to: TimeOfUseGroup, type: has_many, via: lseId}
+- {from: LoadServingEntity, to: UtilityTax, type: has_many, via: lseId}
+- {from: LoadServingEntity, to: CalendarDate, type: has_many, via: lseId}
+- {from: Tariff, to: LoadServingEntity, type: belongs_to, via: lseId}
+- {from: Tariff, to: TariffVersion, type: has_many, via: masterTariffId}
+- {from: Tariff, to: TariffRate, type: has_many, via: populateRates}
+- {from: Tariff, to: Territory, type: belongs_to, via: territoryId}
+- {from: Tariff, to: PropertyKey, type: has_many, via: populateProperties}
+- {from: TariffRate, to: TimeOfUse, type: has_one, via: touId}
+- {from: TariffRate, to: SeasonGroup, type: has_one, via: seasonGroupId}
+- {from: TimeOfUseGroup, to: TimeOfUse, type: has_many, via: touGroupId}
+- {from: TimeOfUseGroup, to: LoadServingEntity, type: belongs_to, via: lseId}
+- {from: Calendar, to: CalendarDate, type: has_many, via: calendarId}
+- {from: PropertyKey, to: LookupValue, type: has_many, via: keyName}
+- {from: UtilityTax, to: Territory, type: belongs_to, via: territoryId}
+- {from: ZipCode, to: LoadServingEntity, type: has_many, via: zipCode}
+- {from: ZipCode, to: Territory, type: has_many, via: zipCode}
+- {from: Calculation, to: Tariff, type: belongs_to, via: masterTariffId}
+- {from: Calculation, to: PropertyKey, type: has_many, via: "propertyInputs[].keyName"}
+- {from: Calculation, to: Territory, type: belongs_to, via: territoryId}
+- {from: CalculationScenario, to: Calculation, type: belongs_to, via: "scenarios[]"}
+- {from: SmartPrice, to: Tariff, type: belongs_to, via: masterTariffId}
+- {from: SmartPrice, to: Territory, type: belongs_to, via: territoryId}
+- {from: TypicalBaseline, to: ZipCode, type: belongs_to, via: zipCode}
+- {from: TypicalBaseline, to: PropertyKey, type: has_many, via: sizingKeyName}
+entry_points:
+- {from: postal code or address, via: get-lses, then: get-tariff}
+- {from: masterTariffId, via: get-tariff-1, then: calculate}
+- {from: zipCode, via: zip-code-api, then: typical-baseline-api}
+caveats: >-
+  No components.schemas exist in the published contract, so field-level types
+  are only what the inline response examples and query parameters expose. The
+  relationships above are asserted from id parameters and documented resource
+  overviews, not from $ref links.

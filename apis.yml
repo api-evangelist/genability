@@ -270,7 +270,51 @@ apis:
     url: openapi/genability-signal-openapi.json
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/echo
+  - type: Sandbox
+    url: sandbox/genability-sandbox.yml
+  - type: ErrorCatalog
+    url: errors/genability-problem-types.yml
 common:
+- type: DomainSecurity
+  url: security/genability-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/genability-agentic-access.yml
+- type: Authentication
+  url: authentication/genability-authentication.yml
+- type: Packages
+  url: packages/genability-packages.yml
+- type: SDKs
+  url: packages/genability-packages.yml
+- type: WellKnown
+  url: well-known/genability-well-known.yml
+- type: LLMsTxt
+  url: llms/genability-llms.txt
+- type: Overlay
+  url: overlays/genability-signal-overlay.yaml
+- type: Conformance
+  url: conformance/genability-conformance.yml
+- type: ErrorCatalog
+  url: errors/genability-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/genability-lifecycle.yml
+- type: StatusPage
+  url: https://status.arcadia.com
+- type: Conventions
+  url: conventions/genability-conventions.yml
+- type: ChangeLog
+  url: changelog/genability-changelog.yml
+- type: ChangeLog
+  url: https://docs.arcadia.com/v2022-12-21-Signal/changelog
+- type: Sandbox
+  url: sandbox/genability-sandbox.yml
+- type: DataModel
+  url: data-model/genability-data-model.yml
+- type: VulnerabilityDisclosure
+  url: security/genability-vulnerability-disclosure.yml
+- type: Security
+  url: https://www.arcadia.com/security
+- type: AgentSkill
+  url: skills/_index.yml
 - type: Website
   url: https://genability.com/
 - type: DeveloperPortal
@@ -301,6 +345,14 @@ common:
   url: https://github.com/Genability/Genability-PHP-Library
 - type: LinkedIn
   url: https://www.linkedin.com/company/genability
+- type: Support
+  url: https://www.arcadia.com/contact
+- type: Blog
+  url: https://www.arcadia.com/blog
+- type: TermsOfService
+  url: https://platform-legal.arcadia.com/#platform-terms-of-service
+- type: PrivacyPolicy
+  url: https://platform-legal.arcadia.com/#arcadia-privacy-policy
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

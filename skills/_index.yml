@@ -1,0 +1,24 @@
+generated: '2026-07-27'
+method: generated
+source: >-
+  openapi/genability-signal-openapi.json (every operationId verified against the
+  harvested contract) plus the Signal workflow guides indexed in
+  https://docs.arcadia.com/v2022-12-21-Signal/llms.txt
+note: >-
+  No provider-published Agent Skills or AGENTS.md exist for Genability or
+  Arcadia (GitHub org and all 103 documentation pages searched 2026-07-27).
+  These are API Evangelist packaged skills grounded in real operationIds and the
+  conventions/errors artifacts in this repo.
+skills:
+- file: genability-find-utility-and-tariff.md
+  name: Find a customer's utility and tariff
+  api: openapi/genability-signal-openapi.json
+  operations: [get-lses, get-tariff, get-tariff-1, get-tariff-history, zip-code-api]
+- file: genability-run-cost-calculation.md
+  name: Price a usage scenario against a tariff
+  api: openapi/genability-signal-openapi.json
+  operations: [calculate, mass-calculate, typical-baseline-api, properties-api, get-one-property, get-utility-taxes, smart-price-api, product-usage-data]
+- file: genability-validate-and-debug.md
+  name: Validate credentials and debug a Signal integration
+  api: openapi/genability-signal-openapi.json
+  operations: [echo-api-authenticate, echo-api-hello, echo-api-validate, echo-api-errors, echo]

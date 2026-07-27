@@ -1,0 +1,116 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://docs.arcadia.com/v2022-12-21-Signal/reference/versioning-releases,
+  https://docs.arcadia.com/v2022-12-21-Signal/reference/requests,
+  https://docs.arcadia.com/v2022-12-21-Signal/changelog,
+  https://status.arcadia.com (+ its Statuspage components API), all HTTP 200 on
+  2026-07-27; deprecated operations derived from
+  openapi/genability-signal-openapi.json
+summary: >-
+  Signal publishes a version statement and a maturity-label scheme, and Arcadia
+  runs a public Statuspage for the platform. There is NO deprecation policy, no
+  Sunset/Deprecation header support, and no published SLA or uptime target.
+versioning:
+  scheme: uri-path segment plus a dated documentation version
+  current: '1.0'
+  path_segments: [/rest/public, /rest/v1]
+  documentation_version: 2022-12-21-Signal
+  docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/versioning-releases
+  statement: >-
+    "The Signal APIs currently use version 1.0. Future API versions may allow
+    users to choose between versions without immediately forcing migration."
+  maturity_labels:
+  - {label: Alpha, meaning: The API contract is not finalized and may change.}
+  - {label: Beta, meaning: The API has been used in production and the contract has stabilized.}
+  - {label: Gamma, meaning: The API is field-proven and has no anticipated changes.}
+  forward_compatibility: >-
+    "New fields may be added to responses over time. API clients should be
+    prepared to ignore object properties they do not recognize."
+    (https://docs.arcadia.com/v2022-12-21-Signal/reference/responses)
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  notice_period: null
+  detail: >-
+    No deprecation or end-of-life policy is published anywhere in the 103-page
+    Signal documentation set (all pages indexed in
+    https://docs.arcadia.com/v2022-12-21-Signal/llms.txt). RFC 8594 Sunset and
+    Deprecation headers are not mentioned. The only EOL signal found anywhere is
+    a Statuspage component labelled "On Demand (Legacy EOL Dec 2025)", which is
+    an individual component notice rather than a policy. No Deprecation pointer
+    is wired in apis.yml because there is no policy to point at.
+deprecated_operations: []
+deprecated_operations_note: >-
+  All 33 operations in openapi/genability-signal-openapi.json carry
+  deprecated:false (or omit the field); none is marked deprecated.
+sla:
+  url: https://platform-legal.arcadia.com/
+  uptime_target: null
+  uptime_commitment: >-
+    None. The Platform Terms of Service commit only to "commercially reasonable
+    efforts to make the Services available at all times except for (a) planned
+    downtime, or (b) any unavailability due to Force Majeure" — there is no
+    percentage target and no service credit.
+  support_services_policy:
+    published: true
+    document: Arcadia Support Services Policy (platform-legal.arcadia.com)
+    hours: 9am to 8pm ET Monday through Friday (excluding public holidays), via email or ticketing system
+    severity_levels:
+    - level: Severity 1 - Critical
+      definition: Critical production issue rendering client production non-functional or materially incorrect, no acceptable workaround (e.g. unable to access API).
+      target_response: 2 hours
+    - level: Severity 2 - Severe
+      definition: Severe production issue affecting a small portion of users or with an accepted workaround (e.g. intermittent availability of API).
+      target_response: 1 business day
+    - level: Severity 3 - Important
+      definition: Important production issue with minimal impact and an acceptable workaround; functional questions and general product inquiries.
+      target_response: 30 business days, or a mutually agreed timeframe
+    exclusions: >-
+      Feature requests, and interruptions due to unavailability of Utility
+      Endpoint Data or other circumstances outside Arcadia's control (force
+      majeure, utility/client downtime, third-party actions).
+  legal_center:
+    url: https://platform-legal.arcadia.com/
+    documents:
+    - Platform Terms of Service (Version 2.0, effective 2025-05-16)
+    - Arcadia Privacy Policy
+    - Arcadia Support Services Policy
+    - Data Processing Addendum
+    - Technical and Organizational Security Measures
+    - Third Party Subprocessors
+    - Arcadia Test Environment License Agreement
+    - Third Party Platform Integration - End User Terms of Service
+    - Urjanet Terms of Service
+    note: >-
+      The Platform Terms of Service name Genability and Signal explicitly, so
+      this legal centre governs the Signal API.
+  note: >-
+    Commercial terms are otherwise negotiated; dash.genability.com offers a
+    14-day free trial with a credit card required to mint API keys.
+status_page:
+  url: https://status.arcadia.com
+  provider: Atlassian Statuspage (page id 9jpyxnxn31yx, "Arcadia")
+  scope: >-
+    Arcadia platform-wide. Components listed on 2026-07-27: UDS API, Utility
+    Cloud API, Plug, Plug API, Utility Expense Management Platform (formerly
+    ENGIE Platform), Authorization, Portal, Utility Cloud (Legacy),
+    Authentication, UDS (Legacy), Console, Dashboard, Connect, SourceViewer,
+    Utility Expense Management, On Demand (Legacy EOL Dec 2025).
+  caveat: >-
+    No component is named "Signal" or "Genability", and the Signal
+    documentation does not link to the status page. This is the corporate
+    parent's status page covering the Arcadia platform that Signal is now part
+    of — recorded as the provider's status page with that qualification.
+  subscribe: email and SMS notifications, plus /api/v2/ Statuspage JSON endpoints
+  history_api: https://status.arcadia.com/api/v2/incidents.json
+changelog:
+  url: https://docs.arcadia.com/v2022-12-21-Signal/changelog
+  detail: changelog/genability-changelog.yml
+support:
+  email: platformsupport@arcadia.com
+  note: >-
+    The documented contact for special API permissions (e.g. creating private
+    TOU definitions) and workflow guidance.

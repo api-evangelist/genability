@@ -1,0 +1,84 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://docs.arcadia.com/v2022-12-21-Signal/reference/tools-libraries plus live
+  registry lookups on npm, Maven Central, RubyGems, PyPI and Packagist
+  (2026-07-27).
+summary: >-
+  Two first-party client libraries are published to public registries: the
+  TypeScript/JavaScript SDK on npm as @genability/api and the Java client on
+  Maven Central as com.genability:genability-client. The PHP library is
+  first-party but distributed only from GitHub (no Packagist package). The Ruby
+  gem is explicitly labelled third-party by Arcadia's own Tools and Libraries
+  page. No Python, Go, .NET, Rust or PHP registry package exists — PyPI
+  (genability), Packagist (genability) and pkg.go.dev searches all returned no
+  first-party result.
+packages:
+- language: javascript
+  registry: npm
+  name: '@genability/api'
+  version: 3.2.4
+  published: '2024-10-08'
+  license: MIT
+  url: https://www.npmjs.com/package/@genability/api
+  repository: https://github.com/Genability/genability-js
+  install: npm install @genability/api
+  official: true
+  note: >-
+    Node.js and browser JavaScript/TypeScript SDK for the Genability APIs.
+    Repository last pushed 2026-02-02.
+- language: java
+  registry: maven-central
+  name: com.genability:genability-client
+  version: 1.16.0
+  published: '2024-12-02'
+  url: https://central.sonatype.com/artifact/com.genability/genability-client
+  repository: https://github.com/Genability/genability-java
+  install: |-
+    <dependency>
+      <groupId>com.genability</groupId>
+      <artifactId>genability-client</artifactId>
+      <version>1.16.0</version>
+    </dependency>
+  official: true
+  note: >-
+    Labelled "Actively Maintained" on the Arcadia Tools and Libraries page; 26
+    published versions. Javadoc at http://genability.github.io/genability-java/javadoc/
+- language: php
+  registry: github
+  name: Genability-PHP-Library
+  url: https://github.com/Genability/Genability-PHP-Library
+  install: git clone https://github.com/Genability/Genability-PHP-Library.git
+  official: true
+  status: legacy
+  note: >-
+    First-party, but not published to Packagist. Arcadia's docs label it a
+    "Legacy Library — not actively maintained but still functional".
+- language: ruby
+  registry: rubygems
+  name: genability
+  version: 0.3.0
+  url: https://rubygems.org/gems/genability
+  repository: https://github.com/activefx/genability
+  install: gem install genability
+  official: false
+  note: >-
+    Third-party gem by Matthew Solt, linked (and explicitly marked
+    "Third-Party Library") from the Arcadia Tools and Libraries page.
+registries_probed:
+- registry: npm
+  query: genability
+  result: '@genability/api (official), @genability/newman-fixes (fork of Postman newman, not an SDK)'
+- registry: pypi
+  query: genability
+  result: 404 — no package
+- registry: packagist
+  query: genability
+  result: 0 results
+- registry: maven-central
+  query: genability
+  result: com.genability:genability-client (official)
+- registry: rubygems
+  query: genability
+  result: genability 0.3.0 (third-party)
+docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/tools-libraries

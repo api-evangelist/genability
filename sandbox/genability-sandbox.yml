@@ -1,0 +1,90 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-summary,
+  .../reference/echo, .../reference/echo-api-hello, .../reference/echo-api-errors,
+  .../reference/echo-api-authenticate, .../reference/echo-api-validate,
+  .../docs/quick-start (all HTTP 200, 2026-07-27) and
+  openapi/genability-signal-openapi.json
+summary: >-
+  Genability ships no separate sandbox host and no test-mode key prefix — there
+  is one environment, https://api.genability.com, and one credential pair
+  (appId/appKey). What it does publish is a first-class Echo API family: five
+  live endpoints for validating credentials, validating input formats, and
+  simulating error responses without touching the priced tariff and calculation
+  endpoints. Commercial trialling is handled by a 14-day free trial on
+  dash.genability.com. No test card, test IBAN, magic identifier, test clock or
+  fixture tool exists — Signal is a reference-data and pricing API, not a
+  payments API.
+environments:
+- name: production
+  base_url: https://api.genability.com
+  note: The only environment. All Echo calls also require valid credentials.
+test_mode:
+  separate_host: false
+  key_prefix: null
+  mode_flag: null
+  note: >-
+    There is no test/live key separation. "All Echo API calls require a valid
+    App ID and App Key for authentication."
+echo_api:
+  purpose: >-
+    "Echo APIs provide simple validation and testing methods to help you get
+    started with the Arcadia platform and debug your API integrations."
+  docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-summary
+  when_to_use:
+  - New developers beginning to use the Arcadia APIs
+  - Debugging API integration issues
+  - Validating credentials and data formats
+  - Testing error handling in your applications
+  endpoints:
+  - name: Echo Overview
+    operationId: echo
+    request: GET /rest/echo/{errorCode}
+    description: Validate how you are calling the Arcadia APIs and debug request formatting, authentication and input values.
+    docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/echo
+  - name: Echo Hello
+    operationId: echo-api-hello
+    request: GET /rest/echo/hello
+    description: Returns a Hello World response when the passed-in credentials are valid, or an unauthorized response when they are invalid.
+    docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-api-hello
+  - name: Validate Authentication
+    operationId: echo-api-authenticate
+    request: GET /rest/echo/authenticate
+    description: Quickly validate the appId and appKey you are using; a successful response indicates they are valid.
+    docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-api-authenticate
+  - name: Validate Input Formats
+    operationId: echo-api-validate
+    request: GET /rest/echo/validate
+    description: Validate whether an input value is in a valid and recognized format, including dates, times, integers and arrays.
+    docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-api-validate
+  - name: Simulate Errors
+    operationId: echo-api-errors
+    request: GET /rest/echo/errors?errorCode={code}
+    description: Simulate possible error messages to test how your application responds to API errors.
+    docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-api-errors
+simulated_error_codes:
+  parameter: errorCode
+  values: ['200', '301', '400', '403', '404', '500']
+  source: openapi/genability-signal-openapi.json#echo-api-errors (enum, verbatim)
+  note: Published enum — not invented. See errors/genability-problem-types.yml for the envelopes returned.
+trial:
+  url: https://dash.genability.com/signup
+  form_title: Genability Signal Trial Sign Up
+  duration: 14-day free trial
+  credit_card_required: true
+  quote: >-
+    "If you are on a free trial, you will need to enter a valid credit card to
+    create an Application and get an API Key."
+  docs: https://docs.arcadia.com/v2022-12-21-Signal/docs/quick-start
+test_data:
+  test_cards: null
+  test_accounts: null
+  magic_identifiers: null
+  test_clock: false
+  fixtures: false
+  note: >-
+    Not applicable — Signal returns real North American utility and tariff
+    reference data and prices caller-supplied usage. Documentation examples use
+    real production identifiers (e.g. lseId 2756 = Georgia Power Co,
+    masterTariffId 512), which are live data, not sandbox fixtures.

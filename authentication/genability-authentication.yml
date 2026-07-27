@@ -1,0 +1,75 @@
+generated: '2026-07-27'
+method: searched
+source: openapi/genability-signal-openapi.json
+docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/authentication
+summary:
+  types:
+  - http
+  http_schemes:
+  - basic
+  api_key_in: []
+  oauth2_flows: []
+  oauth2: false
+  oidc: false
+  mtls: false
+schemes:
+- name: sec0
+  type: http
+  scheme: basic
+  sources:
+  - openapi/genability-signal-openapi.json
+  applied: >-
+    Globally — the document declares a root-level security requirement
+    [{sec0: []}], so every one of the 33 operations requires it.
+  credentials:
+    username: appId
+    password: appKey
+  docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/authentication
+  quote: >-
+    "Authenticate Arcadia Signal API requests with HTTP Basic authentication
+    using your appId and appKey." appId = username, appKey = password. "Most
+    HTTP clients can send Basic Auth credentials directly. If your client
+    requires a header, construct an Authorization: Basic header from the
+    Base64-encoded appId:appKey pair."
+credential_provisioning:
+  self_serve: true
+  steps:
+  - Create an Arcadia user account at https://dash.genability.com/signup
+  - Create or join an Organization at https://dash.genability.com/org (14-day free trial)
+  - Create an API Application at https://dash.genability.com/org/applications to mint appId and appKey
+  - Authenticate with HTTP Basic
+  credit_card_required: true
+  quote: >-
+    "If you are on a free trial, you will need to enter a valid credit card to
+    create an Application and get an API Key."
+  docs: https://docs.arcadia.com/v2022-12-21-Signal/docs/quick-start
+validation:
+  endpoint: GET /rest/echo/authenticate
+  operationId: echo-api-authenticate
+  docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-api-authenticate
+transport:
+  tls_required: true
+  quote: '"All API methods should be called over SSL."'
+  observed_tls: TLSv1.2 on api.genability.com (security/genability-domain-security.yml)
+anonymous_access:
+  available: false
+  note: >-
+    The /rest/public/ paths are "public" only in the sense of non-org-scoped
+    reference data. A live anonymous GET of
+    https://api.genability.com/rest/public/tariffs on 2026-07-27 returned HTTP
+    401 with {"code":"Unauthorized","message":"The credentials were not supplied
+    or are invalid","propertyName":"appId"}.
+not_supported:
+  oauth2: No oauth2 securityScheme, no token endpoint, no scopes — scopes/ is intentionally absent.
+  openid_connect: >-
+    https://api.genability.com/.well-known/openid-configuration returns the
+    Signal 401 envelope, not an OIDC document.
+  mutual_tls: Not offered.
+  api_key_header: Not offered — credentials travel as Basic auth, not as a key header.
+related:
+  sso: >-
+    https://docs.arcadia.com/v2022-12-21-Signal/docs/single-sign-on covers SSO
+    for human sign-in to the Arcadia dashboard, not API authentication.
+  permissions: >-
+    Creating private TOU definitions (POST /rest/timeofuses) "requires special
+    API permissions. Contact platformsupport@arcadia.com to request access."

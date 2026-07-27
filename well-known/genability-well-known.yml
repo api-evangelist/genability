@@ -1,0 +1,61 @@
+generated: '2026-07-27'
+method: probed
+source: >-
+  Live probes of api.genability.com (the only OpenAPI servers[] host and every
+  apis[].baseURL), genability.com, and the documentation host docs.arcadia.com
+  (2026-07-27).
+summary: >-
+  Genability publishes no /.well-known/ discovery surface. Every path on the API
+  host returns the standard Signal Unauthorized envelope (HTTP 401) because the
+  gateway authenticates before routing — including /.well-known/security.txt and
+  /.well-known/openid-configuration — so no anonymous discovery document is
+  reachable. The documentation host returns 404. genability.com returns HTTP 200
+  for any /.well-known/ path but the body is the Arcadia marketing SPA shell
+  (<!DOCTYPE html>), i.e. a soft-404, NOT a security.txt: recorded as
+  not-published, not as a hit. No security.txt, no OIDC/OAuth metadata, no
+  api-catalog and no ai-plugin.json exist for this provider. Absence is valid
+  data.
+hosts:
+- host: https://api.genability.com
+  role: api (OpenAPI servers[0], every apis[].baseURL)
+  documents:
+  - path: /.well-known/security.txt
+    status: 401
+    published: false
+    note: Signal Unauthorized envelope, not a security.txt.
+  - path: /.well-known/openid-configuration
+    status: 401
+    published: false
+  - path: /.well-known/oauth-authorization-server
+    status: 401
+    published: false
+  - path: /.well-known/api-catalog
+    status: 401
+    published: false
+  - path: /.well-known/ai-plugin.json
+    status: 401
+    published: false
+- host: https://genability.com
+  role: website (redirects to www.arcadia.com/platform)
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    published: false
+    note: >-
+      Soft-404 — returns the Next.js marketing HTML shell for any path, not an
+      RFC 9116 document.
+- host: https://docs.arcadia.com
+  role: documentation / developer portal
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    published: false
+files: []
+security_txt: null
+related:
+  security_contact: security@arcadia.com
+  security_page: https://www.arcadia.com/security
+  note: >-
+    A security contact and PGP public key ARE published, but on the corporate
+    security page rather than as an RFC 9116 /.well-known/security.txt. Captured
+    in security/genability-vulnerability-disclosure.yml.

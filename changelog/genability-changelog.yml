@@ -1,0 +1,73 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://docs.arcadia.com/v2022-12-21-Signal/changelog (HTTP 200) and the
+  Changelog section of https://docs.arcadia.com/v2022-12-21-Signal/llms.txt
+  (HTTP 200), fetched 2026-07-27
+summary: >-
+  Arcadia publishes one dated changelog across the whole documentation site; it
+  is reachable from the Signal documentation version and indexed in the Signal
+  llms.txt. Every entry visible in the current window concerns the Plug product
+  (utility-account connection and bill extraction), not the Signal tariff or
+  calculation APIs — so Signal itself has shipped no announced change in the
+  captured window. Entries are titled and dated by month rather than versioned;
+  the changelog carries no semantic version numbers and no breaking-change
+  markers.
+scheme: dated entries, per-product prefix in the title (e.g. "[Plug] ...")
+versioning_scheme: none published in the changelog (the API itself is version 1.0)
+current_version: '1.0'
+breaking_change_policy: null
+entries:
+- title: '[Plug] New Providers - June 2026'
+  date: '2026-06'
+  product: Plug
+  kind: additions
+  url: https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-new-providers-june-2026
+- title: '[Plug] Extraction Bug Fixes - June 2026'
+  date: '2026-06'
+  product: Plug
+  kind: fixes
+  url: https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-extraction-bug-fixes-june-2026
+- title: '[Plug] New Providers - May 2026'
+  date: '2026-05'
+  product: Plug
+  kind: additions
+  url: https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-new-providers-may-2026
+- title: '[Plug] Extraction Bug Fixes - May 2026'
+  date: '2026-05'
+  product: Plug
+  kind: fixes
+  url: https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-extraction-bug-fixes-may-2026
+- title: '[Plug] New Providers - April 2026'
+  date: '2026-04'
+  product: Plug
+  kind: additions
+  url: https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-new-providers-april-2026
+- title: '[Plug] Extraction Bug Fixes - April 2026'
+  date: '2026-04'
+  product: Plug
+  kind: fixes
+  url: https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-extraction-bug-fixes-april-2026
+- title: '[Plug] New Providers - March 2026'
+  date: '2026-03'
+  product: Plug
+  kind: additions
+  url: https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-new-providers-march-2026
+- title: '[Plug] Extraction Bug Fixes - March 2026'
+  date: '2026-03'
+  product: Plug
+  kind: fixes
+  url: https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-extraction-bug-fixes-march-2026
+- title: 'Plug: Improved full-page capture and general rendering reliability.'
+  product: Plug
+  kind: fixes
+  url: https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-improved-full-page-capture-and-general-rendering-reliability
+- title: '[Plug] Token Storage - PSEG Long Island'
+  product: Plug
+  kind: additions
+  url: https://docs.arcadia.com/v2022-12-21-Signal/changelog/plug-token-storage-pseg-long-island
+signal_specific_entries: 0
+note: >-
+  Plug is Arcadia's utility-account connection product, profiled separately
+  under all/arcadia/. It appears here only because Arcadia serves one changelog
+  for all documentation versions, including the Signal version.

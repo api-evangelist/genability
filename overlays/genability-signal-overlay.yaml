@@ -1,0 +1,239 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Arcadia Platform - Signal
+  version: 1.0.0
+extends: openapi/genability-signal-openapi.json
+x-generated: '2026-07-27'
+x-method: generated
+x-note: Enhancements only — the harvested Signal OpenAPI is never mutated. Tags, descriptions and defect annotations
+  added by API Evangelist; no operation, parameter or response was invented.
+actions:
+- target: $.info
+  description: Annotate the document with API Evangelist provenance.
+  update:
+    x-apievangelist-provider: genability
+    x-apievangelist-harvested: '2026-07-27'
+    x-apievangelist-source: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-tariff (embedded api.schema)
+    description: 'Arcadia Platform - Signal: North American electricity tariff, utility and rate reference data
+      plus an on-demand bill-calculation engine, served from api.genability.com. Every endpoint requires HTTP Basic
+      credentials (appId as username, appKey as password); the /rest/public/ paths are non-org-scoped reference
+      data, not anonymous.'
+- target: $.servers[0]
+  description: Name the single production server.
+  update:
+    description: Production (the only environment; there is no sandbox host)
+- target: $.components.securitySchemes.sec0
+  description: Describe the Basic auth scheme in the terms the docs use.
+  update:
+    description: HTTP Basic authentication. Username = appId, password = appKey. Create both at https://dash.genability.com/org/applications.
+      Validate with GET /rest/echo/authenticate.
+- target: $
+  description: Declare the tag set API Evangelist derived from the Signal API families (the original document declares
+    no tags).
+  update:
+    tags:
+    - name: Echo
+      description: 'Testing and debugging endpoints: validate credentials, validate input formats, simulate errors.'
+    - name: Tariffs
+      description: Search, retrieve and version-history North American electricity tariffs.
+    - name: Load Serving Entities
+      description: Utilities — investor-owned, municipal and cooperative — serving the USA, Canada and Mexico.
+    - name: Territories
+      description: Service, baseline, climate and tariff-applicability geographies.
+    - name: Seasons
+      description: Seasonal definitions used when a tariff prices summer and winter differently.
+    - name: Time of Use
+      description: TOU groups, TOU definitions and their interval schedules.
+    - name: Calendars
+      description: Holiday and special-day schedules that drive rate periods.
+    - name: Properties
+      description: Property keys, lookup values and lookup statistics.
+    - name: Calculations
+      description: On-demand and mass bill calculation against any tariff.
+    - name: Smart Price
+      description: Single blended $/kWh price signal for a utility, tariff and window.
+    - name: Utility Taxes
+      description: Jurisdictional taxes applied to a modeled electricity bill.
+    - name: Typical Baseline
+      description: Best-fit modeled load profiles when real interval data is unavailable.
+    - name: ZIP Codes
+      description: ZIP/postal code detail and the utilities and territories that serve it.
+    - name: Organization Usage
+      description: Month-to-date Signal API consumption for your organization.
+- target: $.paths['/rest/echo/{error_code}'].get
+  description: Tag echo with the Echo family.
+  update:
+    tags:
+    - Echo
+- target: $.paths['/rest/echo/hello'].get
+  description: Tag echo-api-hello with the Echo family.
+  update:
+    tags:
+    - Echo
+- target: $.paths['/rest/echo/errors'].get
+  description: Tag echo-api-errors with the Echo family.
+  update:
+    tags:
+    - Echo
+- target: $.paths['/rest/echo/authenticate'].get
+  description: Tag echo-api-authenticate with the Echo family.
+  update:
+    tags:
+    - Echo
+- target: $.paths['/rest/echo/validate'].get
+  description: Tag echo-api-validate with the Echo family.
+  update:
+    tags:
+    - Echo
+- target: $.paths['/rest/v1/ondemand/calculate'].post
+  description: Tag calculate with the Calculations family.
+  update:
+    tags:
+    - Calculations
+- target: $.paths['/rest/v1/ondemand/calculate/mass'].post
+  description: Tag mass-calculate with the Calculations family.
+  update:
+    tags:
+    - Calculations
+- target: $.paths['/rest/v1/prices/smart'].get
+  description: Tag smart-price-api with the Smart Price family.
+  update:
+    tags:
+    - Smart Price
+- target: $.paths['/rest/public/tariffs'].get
+  description: Tag get-tariff with the Tariffs family.
+  update:
+    tags:
+    - Tariffs
+- target: $.paths['/rest/public/tariffs/{masterTariffId}/history'].get
+  description: Tag get-tariff-history with the Tariffs family.
+  update:
+    tags:
+    - Tariffs
+- target: $.paths['/rest/public/lses'].get
+  description: Tag get-lses with the Load Serving Entities family.
+  update:
+    tags:
+    - Load Serving Entities
+- target: $.paths['/rest/public/lses/{lseId}'].get
+  description: Tag get-one-lse with the Load Serving Entities family.
+  update:
+    tags:
+    - Load Serving Entities
+- target: $.paths['/rest/public/territories'].get
+  description: Tag territory-1 with the Territories family.
+  update:
+    tags:
+    - Territories
+- target: $.paths['/rest/public/territories/{territoryId}'].get
+  description: Tag get-one-territory with the Territories family.
+  update:
+    tags:
+    - Territories
+- target: $.paths['/rest/public/seasons'].get
+  description: Tag get-season with the Seasons family.
+  update:
+    tags:
+    - Seasons
+- target: $.paths['/rest/public/timeofuses/{lseId}/{touGroupId}'].get
+  description: Tag get-tou-group with the Time of Use family.
+  update:
+    tags:
+    - Time of Use
+- target: $.paths['/rest/public/timeofuses/{lseId}/{touGroupId}/intervals'].get
+  description: Tag get-tou-group-intervals with the Time of Use family.
+  update:
+    tags:
+    - Time of Use
+- target: $.paths['/rest/public/timeofuses/{touId}'].get
+  description: Tag get-tou with the Time of Use family.
+  update:
+    tags:
+    - Time of Use
+- target: $.paths['/rest/public/timeofuses/intervals/{touId}'].get
+  description: Tag get-tou-intervals with the Time of Use family.
+  update:
+    tags:
+    - Time of Use
+- target: $.paths['/rest/timeofuses'].post
+  description: Tag tou-api-copy-3 with the Time of Use family.
+  update:
+    tags:
+    - Time of Use
+- target: $.paths['/rest/public/calendars/'].get
+  description: Tag get-calendars with the Calendars family.
+  update:
+    tags:
+    - Calendars
+- target: $.paths['/rest/public/calendars/{calendarId}'].get
+  description: Tag get-one-calendar with the Calendars family.
+  update:
+    tags:
+    - Calendars
+- target: $.paths['/rest/public/calendars/dates'].get
+  description: Tag get-calendar-dates with the Calendars family.
+  update:
+    tags:
+    - Calendars
+- target: $.paths['/rest/public/properties'].get
+  description: Tag properties-api with the Properties family.
+  update:
+    tags:
+    - Properties
+- target: $.paths['/rest/public/properties/{keyName}'].get
+  description: Tag get-one-property with the Properties family.
+  update:
+    tags:
+    - Properties
+- target: $.paths['/GET /rest/v1/utilitytaxes'].get
+  description: Tag get-utility-taxes with the Utility Taxes family.
+  update:
+    tags:
+    - Utility Taxes
+- target: $.paths['/rest/v1/utilitytaxes/{utilityTaxId}'].get
+  description: Tag get-one-utility-tax with the Utility Taxes family.
+  update:
+    tags:
+    - Utility Taxes
+- target: $.paths['/rest/public/properties/{keyName}/lookups'].get
+  description: Tag get-lookups with the Properties family.
+  update:
+    tags:
+    - Properties
+- target: $.paths['/rest/public/properties/{propertyKey}/stats'].get
+  description: Tag lookup-stats-api with the Properties family.
+  update:
+    tags:
+    - Properties
+- target: $.paths['/rest/v1/typicals/baselines/best'].get
+  description: Tag typical-baseline-api with the Typical Baseline family.
+  update:
+    tags:
+    - Typical Baseline
+- target: $.paths['/rest/public/zipcodes/{zipCode}'].get
+  description: Tag zip-code-api with the ZIP Codes family.
+  update:
+    tags:
+    - ZIP Codes
+- target: $.paths['/rest/v1/orgs/usage'].get
+  description: Tag product-usage-data with the Organization Usage family.
+  update:
+    tags:
+    - Organization Usage
+- target: $.paths['/rest/public/tariffs/{masterTariffId}'].get
+  description: Tag get-tariff-1 with the Tariffs family.
+  update:
+    tags:
+    - Tariffs
+- target: $.paths['/GET /rest/v1/utilitytaxes']
+  description: 'Flag an upstream defect: the path key carries the HTTP method inside the path string. The real request
+    is GET https://api.genability.com/rest/v1/utilitytaxes. Preserved verbatim in the harvested document; annotated,
+    not rewritten.'
+  update:
+    x-apievangelist-defect: malformed path key — includes the HTTP method; correct path is /rest/v1/utilitytaxes
+- target: $.paths['/rest/echo/{error_code}'].get
+  description: 'Flag an upstream defect: the path template is {error_code} but the declared path parameter is named
+    errorCode, and the operation declares no responses.'
+  update:
+    x-apievangelist-defect: path template {error_code} does not match the declared parameter name errorCode; no
+      responses declared

@@ -1,0 +1,157 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://docs.arcadia.com/v2022-12-21-Signal/reference/requests,
+  https://docs.arcadia.com/v2022-12-21-Signal/reference/responses,
+  https://docs.arcadia.com/v2022-12-21-Signal/reference/dates-times,
+  https://docs.arcadia.com/v2022-12-21-Signal/reference/authentication,
+  https://docs.arcadia.com/v2022-12-21-Signal/docs/spike-limiter,
+  https://docs.arcadia.com/v2022-12-21-Signal/docs/rate-limit-best-practices
+  (all HTTP 200, fetched 2026-07-27), cross-checked against
+  openapi/genability-signal-openapi.json
+summary: >-
+  Signal is a classic pre-REST-maturity JSON API: one envelope for every
+  response, offset pagination, query-parameter search/sort, three field views,
+  and no hypermedia. Everything is HTTP Basic over TLS. There is no idempotency
+  contract, no request-id header and no conditional-request support documented
+  anywhere in the 103-page Signal documentation set.
+base_urls:
+- https://api.genability.com/rest/public/{resource}
+- https://api.genability.com/rest/v1/{resource}
+authentication:
+  style: http-basic
+  username_field: appId
+  password_field: appKey
+  transport: TLS only ("All API methods should be called over SSL")
+  validate_endpoint: GET /rest/echo/authenticate
+  docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/authentication
+  detail: authentication/genability-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  detail: >-
+    No Idempotency-Key header, no client-supplied request key and no replay
+    window is documented in the Signal reference or present in the OpenAPI. The
+    only mutating operation in the published contract is POST /rest/timeofuses
+    (Create Private TOU Definition), which requires special permissions granted
+    by platformsupport@arcadia.com. Retries of the two calculation POSTs
+    (/rest/v1/ondemand/calculate, /rest/v1/ondemand/calculate/mass) are safe in
+    practice because they are stateless pricing calls that create no resource,
+    but Genability makes no idempotency guarantee. No Idempotency pointer is
+    wired in apis.yml because there is no idempotency contract to point at.
+http_methods:
+  get: Reads resources by URL, often with query-string criteria.
+  post: Creates a new resource, or with the `method` parameter performs a PUT or DELETE.
+  put: Updates an existing resource.
+  delete: Deletes an existing resource.
+  method_override:
+    supported: true
+    parameter: method
+    values: [PUT, DELETE]
+    note: >-
+      POST overload for clients that cannot send PUT/DELETE. A tunnelling
+      convention, not a REST one — agents should prefer the native verb.
+pagination:
+  style: offset
+  parameters:
+  - name: pageStart
+    type: integer
+    default: 0
+    description: Index of the first result.
+  - name: pageCount
+    type: integer
+    default: 25
+    description: Number of results to return.
+  response_fields:
+  - name: count
+    description: >-
+      Total number of records matching the query (not the number returned).
+      Capped at 100000 — interpret 100000 as "100,000 or more".
+  cursor: false
+  link_header: false
+search_and_sort:
+  parameters:
+  - {name: search, type: string, description: Text string to search for.}
+  - {name: searchOn, type: string, description: Comma-separated list of fields to search within.}
+  - {name: startsWith, type: boolean, description: Return only results beginning with the search string.}
+  - {name: endsWith, type: boolean, description: Return only results ending with the search string.}
+  - {name: isRegex, type: boolean, description: Treat the search string as a regular expression.}
+  - {name: sortOn, type: string, description: Comma-separated list of fields to sort by.}
+  - {name: sortOrder, type: string, values: [ASC, DESC], description: Comma-separated list of sort orders.}
+field_selection:
+  parameter: fields
+  values:
+  - {value: '', returns: Common fields needed for display and most actions (default).}
+  - {value: min, returns: A subset of fields for lookups and cross-references.}
+  - {value: ext, returns: All available fields.}
+  expansion:
+    style: populate flags
+    parameters: [populateProperties, populateRates, populateDocuments, populateAggregateUsage, populateChildOrgs, populateMasterTariffIds]
+    note: >-
+      Related sub-resources are inlined via boolean populate* query parameters
+      rather than a generic expand syntax.
+array_inputs:
+  styles:
+  - comma-separated (tariffTypes=DEFAULT,ALTERNATIVE)
+  - repeated parameter (tariffTypes=DEFAULT&tariffTypes=ALTERNATIVE)
+dates_and_times:
+  format: ISO 8601 with explicit timezone offset (e.g. 2016-07-13T00:00:00-07:00)
+  common_fields: [fromDateTime, toDateTime, tariffEffectiveOn, startDateTime, endDateTime]
+  interval_series:
+    fields: [dataSeries, fromDateTime, duration, keyName, unit]
+    duration: milliseconds per interval (3600000 = 60 minutes)
+  docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/dates-times
+response_envelope:
+  content_type: application/json
+  shape:
+    status: 'String — success | error'
+    count: Integer — total records matching the request (may exceed those returned)
+    type: String — resource or object type (e.g. LoadServingEntity, Tariff, Error)
+    results: Array — always an array, even for a single-object request
+  note: Results are returned as an array even when requesting a single object.
+error_envelope:
+  same_wrapper: true
+  status_value: error
+  type_value: Error
+  item_fields:
+    code: Unique string identifying the error type (e.g. NotNull, Unauthorized).
+    message: Localized, user-readable message describing the error.
+    objectName: Object type related to the error.
+    propertyName: Object property related to the error.
+  rfc9457: false
+  detail: errors/genability-problem-types.yml
+forward_compatibility: >-
+  "New fields may be added to responses over time. API clients should be
+  prepared to ignore object properties they do not recognize."
+rate_limit_signaling:
+  documented: true
+  numeric_limit_published: false
+  mechanism: dynamic spike limiter
+  algorithm: >-
+    Per-organization requests-per-minute limit computed from that org's own
+    60-minute rolling average and traffic variability, recalculated every
+    minute.
+  status_code: 429
+  headers: [Retry-After]
+  guidance:
+    concurrency_example: 4 concurrent calls
+    ramp_up: increase concurrency gradually over 8-10 minutes
+  docs:
+  - https://docs.arcadia.com/v2022-12-21-Signal/docs/spike-limiter
+  - https://docs.arcadia.com/v2022-12-21-Signal/docs/rate-limit-best-practices
+compression:
+  request_header: 'Accept-Encoding: gzip'
+  supported: true
+request_tracing:
+  request_id_header: null
+  documented: false
+versioning:
+  scheme: uri-path segment (/rest/public, /rest/v1) + documentation version 2022-12-21-Signal
+  current: '1.0'
+  detail: lifecycle/genability-lifecycle.yml
+cross_references:
+  authentication: authentication/genability-authentication.yml
+  errors: errors/genability-problem-types.yml
+  lifecycle: lifecycle/genability-lifecycle.yml
+  sandbox: sandbox/genability-sandbox.yml
+  data_model: data-model/genability-data-model.yml

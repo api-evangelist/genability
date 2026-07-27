@@ -1,0 +1,150 @@
+generated: '2026-07-27'
+method: derived
+source: openapi/genability-signal-openapi.json
+status: candidate
+summary: 'No official hosted or remote Model Context Protocol (MCP) server was found for Genability or
+  its parent Arcadia. The Signal documentation (all 103 pages indexed in https://docs.arcadia.com/v2022-12-21-Signal/llms.txt),
+  the GitHub organization https://github.com/Genability (13 public repos) and npm were searched on 2026-07-27:
+  zero MCP references. The candidate tool set below is DERIVED one-to-one from the 33 operations in the
+  harvested Signal OpenAPI as a proposal for an agent-facing surface. It is not published by Genability,
+  so no MCPServer pointer is wired in apis.yml.'
+server: null
+transport: null
+auth:
+  type: http-basic
+  username: appId
+  password: appKey
+  docs: https://docs.arcadia.com/v2022-12-21-Signal/reference/authentication
+candidate_tools:
+- name: echo_debug_request
+  description: Echo Overview
+  maps_to: GET /rest/echo/{error_code}
+  source_operation: openapi/genability-signal-openapi.json#echo
+- name: echo_hello
+  description: Echo Hello
+  maps_to: GET /rest/echo/hello
+  source_operation: openapi/genability-signal-openapi.json#echo-api-hello
+- name: simulate_error
+  description: Simulate Errors
+  maps_to: GET /rest/echo/errors
+  source_operation: openapi/genability-signal-openapi.json#echo-api-errors
+- name: validate_credentials
+  description: Validate Authentication
+  maps_to: GET /rest/echo/authenticate
+  source_operation: openapi/genability-signal-openapi.json#echo-api-authenticate
+- name: validate_input_format
+  description: Validate Input Formats
+  maps_to: GET /rest/echo/validate
+  source_operation: openapi/genability-signal-openapi.json#echo-api-validate
+- name: calculate_cost
+  description: Calculate Cost
+  maps_to: POST /rest/v1/ondemand/calculate
+  source_operation: openapi/genability-signal-openapi.json#calculate
+- name: calculate_cost_mass
+  description: Calculate Multiple Scenarios
+  maps_to: POST /rest/v1/ondemand/calculate/mass
+  source_operation: openapi/genability-signal-openapi.json#mass-calculate
+- name: get_smart_price
+  description: Get Smart Price
+  maps_to: GET /rest/v1/prices/smart
+  source_operation: openapi/genability-signal-openapi.json#smart-price-api
+- name: list_tariffs
+  description: List Tariffs
+  maps_to: GET /rest/public/tariffs
+  source_operation: openapi/genability-signal-openapi.json#get-tariff
+- name: get_tariff_history
+  description: Get Tariff History
+  maps_to: GET /rest/public/tariffs/{masterTariffId}/history
+  source_operation: openapi/genability-signal-openapi.json#get-tariff-history
+- name: list_lses
+  description: List LSEs
+  maps_to: GET /rest/public/lses
+  source_operation: openapi/genability-signal-openapi.json#get-lses
+- name: get_lse
+  description: Get LSE by ID
+  maps_to: GET /rest/public/lses/{lseId}
+  source_operation: openapi/genability-signal-openapi.json#get-one-lse
+- name: list_territories
+  description: List Territories
+  maps_to: GET /rest/public/territories
+  source_operation: openapi/genability-signal-openapi.json#territory-1
+- name: get_territory
+  description: Get Territory by ID
+  maps_to: GET /rest/public/territories/{territoryId}
+  source_operation: openapi/genability-signal-openapi.json#get-one-territory
+- name: list_season_groups
+  description: List Season Groups
+  maps_to: GET /rest/public/seasons
+  source_operation: openapi/genability-signal-openapi.json#get-season
+- name: get_tou_group
+  description: Get TOU Group
+  maps_to: GET /rest/public/timeofuses/{lseId}/{touGroupId}
+  source_operation: openapi/genability-signal-openapi.json#get-tou-group
+- name: list_tou_group_intervals
+  description: List TOU Group Intervals
+  maps_to: GET /rest/public/timeofuses/{lseId}/{touGroupId}/intervals
+  source_operation: openapi/genability-signal-openapi.json#get-tou-group-intervals
+- name: get_tou
+  description: Get TOU by ID
+  maps_to: GET /rest/public/timeofuses/{touId}
+  source_operation: openapi/genability-signal-openapi.json#get-tou
+- name: list_tou_intervals
+  description: List TOU Intervals
+  maps_to: GET /rest/public/timeofuses/intervals/{touId}
+  source_operation: openapi/genability-signal-openapi.json#get-tou-intervals
+- name: create_private_tou_definition
+  description: Create Private TOU Definition
+  maps_to: POST /rest/timeofuses
+  source_operation: openapi/genability-signal-openapi.json#tou-api-copy-3
+- name: list_calendars
+  description: List Calendars
+  maps_to: GET /rest/public/calendars/
+  source_operation: openapi/genability-signal-openapi.json#get-calendars
+- name: get_calendar
+  description: Get Calendar by ID
+  maps_to: GET /rest/public/calendars/{calendarId}
+  source_operation: openapi/genability-signal-openapi.json#get-one-calendar
+- name: list_calendar_dates
+  description: List Calendar Dates
+  maps_to: GET /rest/public/calendars/dates
+  source_operation: openapi/genability-signal-openapi.json#get-calendar-dates
+- name: list_properties
+  description: List Properties
+  maps_to: GET /rest/public/properties
+  source_operation: openapi/genability-signal-openapi.json#properties-api
+- name: get_property
+  description: Get Property by Key
+  maps_to: GET /rest/public/properties/{keyName}
+  source_operation: openapi/genability-signal-openapi.json#get-one-property
+- name: list_utility_taxes
+  description: Get Utility Taxes
+  maps_to: GET /rest/v1/utilitytaxes
+  source_operation: openapi/genability-signal-openapi.json#get-utility-taxes
+- name: get_utility_tax
+  description: Get One Utility Tax
+  maps_to: GET /rest/v1/utilitytaxes/{utilityTaxId}
+  source_operation: openapi/genability-signal-openapi.json#get-one-utility-tax
+- name: list_lookup_values
+  description: List Lookup Values
+  maps_to: GET /rest/public/properties/{keyName}/lookups
+  source_operation: openapi/genability-signal-openapi.json#get-lookups
+- name: get_lookup_stats
+  description: Get Lookup Stats
+  maps_to: GET /rest/public/properties/{propertyKey}/stats
+  source_operation: openapi/genability-signal-openapi.json#lookup-stats-api
+- name: get_typical_baseline
+  description: Get Best Typical Baseline
+  maps_to: GET /rest/v1/typicals/baselines/best
+  source_operation: openapi/genability-signal-openapi.json#typical-baseline-api
+- name: get_zip_code
+  description: Get ZIP Code Details
+  maps_to: GET /rest/public/zipcodes/{zipCode}
+  source_operation: openapi/genability-signal-openapi.json#zip-code-api
+- name: get_organization_usage
+  description: Get Organization Usage
+  maps_to: GET /rest/v1/orgs/usage
+  source_operation: openapi/genability-signal-openapi.json#product-usage-data
+- name: get_tariff
+  description: Get Tariff by MTID
+  maps_to: GET /rest/public/tariffs/{masterTariffId}
+  source_operation: openapi/genability-signal-openapi.json#get-tariff-1

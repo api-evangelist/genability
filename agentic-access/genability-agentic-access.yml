@@ -1,0 +1,364 @@
+generated: '2026-07-27'
+method: generated
+source: openapi/genability-signal-openapi.json
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 33
+  by_action_class:
+    connected: 30
+    acting: 3
+  by_consequence:
+    read: 30
+    write: 3
+  human_in_the_loop_required: 0
+operations:
+- path: /rest/echo/{error_code}
+  method: get
+  operationId: echo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/echo/hello
+  method: get
+  operationId: echo-api-hello
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/echo/errors
+  method: get
+  operationId: echo-api-errors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/echo/authenticate
+  method: get
+  operationId: echo-api-authenticate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/echo/validate
+  method: get
+  operationId: echo-api-validate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/ondemand/calculate
+  method: post
+  operationId: calculate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/ondemand/calculate/mass
+  method: post
+  operationId: mass-calculate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/prices/smart
+  method: get
+  operationId: smart-price-api
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/tariffs
+  method: get
+  operationId: get-tariff
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/tariffs/{masterTariffId}/history
+  method: get
+  operationId: get-tariff-history
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/lses
+  method: get
+  operationId: get-lses
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/lses/{lseId}
+  method: get
+  operationId: get-one-lse
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/territories
+  method: get
+  operationId: territory-1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/territories/{territoryId}
+  method: get
+  operationId: get-one-territory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/seasons
+  method: get
+  operationId: get-season
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/timeofuses/{lseId}/{touGroupId}
+  method: get
+  operationId: get-tou-group
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/timeofuses/{lseId}/{touGroupId}/intervals
+  method: get
+  operationId: get-tou-group-intervals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/timeofuses/{touId}
+  method: get
+  operationId: get-tou
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/timeofuses/intervals/{touId}
+  method: get
+  operationId: get-tou-intervals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/timeofuses
+  method: post
+  operationId: tou-api-copy-3
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/public/calendars/
+  method: get
+  operationId: get-calendars
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/calendars/{calendarId}
+  method: get
+  operationId: get-one-calendar
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/calendars/dates
+  method: get
+  operationId: get-calendar-dates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/properties
+  method: get
+  operationId: properties-api
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/properties/{keyName}
+  method: get
+  operationId: get-one-property
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /GET /rest/v1/utilitytaxes
+  method: get
+  operationId: get-utility-taxes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/utilitytaxes/{utilityTaxId}
+  method: get
+  operationId: get-one-utility-tax
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/properties/{keyName}/lookups
+  method: get
+  operationId: get-lookups
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/properties/{propertyKey}/stats
+  method: get
+  operationId: lookup-stats-api
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/typicals/baselines/best
+  method: get
+  operationId: typical-baseline-api
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/zipcodes/{zipCode}
+  method: get
+  operationId: zip-code-api
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/orgs/usage
+  method: get
+  operationId: product-usage-data
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/public/tariffs/{masterTariffId}
+  method: get
+  operationId: get-tariff-1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
