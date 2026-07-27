@@ -1,0 +1,258 @@
+aid: genability
+name: Genability
+review:
+  question: >-
+    Does Genability operate under an energy consumer-data mandate, and does it
+    publish a real, downloadable, publicly reachable API contract?
+  answer: >-
+    No mandate applies to Genability, and none is referenced anywhere in its
+    documentation. It does publish a real, self-serve, fully documented commercial
+    API — the Signal API at https://api.genability.com — whose OpenAPI 3.1.0
+    contract (33 paths) was harvested verbatim from the live documentation. Every
+    endpoint is authenticated; none of the data is open.
+  date: '2026-07-27'
+  reviewer: API Evangelist
+  homeMarket: United States
+
+mandateAndAccess:
+  homeMarket: United States
+  dataCoverage: >-
+    Electricity utility and tariff data across the USA, Canada and Mexico,
+    "including investor-owned utilities, municipalities, and cooperatives"
+    (quoted from https://docs.arcadia.com/v2022-12-21-Signal/docs/find-customer-utility).
+  mandateRegime: none
+  mandateStatus: not-applicable
+  mandateEvidence: >-
+    Genability is a private, commercial energy-data platform — not a utility, not
+    a retailer, not a load-serving entity, and not a designated data holder under
+    any consumer energy data right. No US federal Green Button mandate exists;
+    Green Button is voluntary, and Genability does not claim it. All 103
+    documentation pages listed in
+    https://docs.arcadia.com/v2022-12-21-Signal/llms.txt were fetched (all HTTP
+    200) and grepped case-insensitively for "Green Button", "GreenButton",
+    "ESPI", "OpenADR", "IEEE 2030.5", "IEC 61968", "Consumer Data Right", "CDR"
+    and "NAESB": ZERO matches. The harvested OpenAPI contract was grepped for the
+    same terms: ZERO matches. There is therefore no mandate to verify and no
+    compliance claim to discount — this is an honest `none` / `not-applicable`,
+    not an unverified claim.
+  dataStandard: >-
+    no standard reference found — Genability implements a proprietary tariff data
+    model (Load Serving Entity, Master Tariff ID, Territory, Season, TOU Group,
+    Property Key, Typical Baseline). No Green Button/ESPI, CDR Consumer Data
+    Standards, OCPP/OCPI, OpenADR, IEEE 2030.5 or IEC CIM conformance is claimed
+    or referenced.
+  consumerDataApi:
+    available: false
+    detail: >-
+      Genability's Signal API exposes NO individual customer's usage or billing
+      data. It is tariff and rate reference data plus a calculation engine: the
+      caller supplies the usage scenario (or asks for a modeled "typical
+      baseline" at /rest/v1/typicals/baselines/best) and Signal prices it. There
+      is no consent flow, no account-linking flow, no utility credential
+      exchange, and no interval-data retrieval in the 33 documented paths. The
+      consumer-data surface for this corporate family lives in a DIFFERENT
+      product — Arcadia's Plug/Arc API at api.arcadia.com — which is profiled
+      separately under all/arcadia/.
+  marketDataOpen:
+    available: false
+    detail: >-
+      Nothing is published openly. Every probe of https://api.genability.com
+      returned HTTP 401 with
+      {"code":"Unauthorized","message":"The credentials were not supplied or are
+      invalid","propertyName":"appId"} — including the paths named /rest/public/,
+      which are "public" only in the sense of being non-org-scoped reference
+      data, not in the sense of being anonymously reachable. Probed and confirmed
+      401 on 2026-07-27: /, /rest/public/tariffs, /rest/v1/tariffs,
+      /openapi.json, /swagger.json, /.well-known/openid-configuration. The split
+      for this organization is therefore closed/closed on data, and open only on
+      documentation.
+  accessGate: self-serve
+  accessGateDetail: >-
+    Documented, four-step, genuinely self-serve onboarding (quoted from
+    https://docs.arcadia.com/v2022-12-21-Signal/docs/quick-start): (1) "Create
+    your own Arcadia User Account" at https://dash.genability.com/signup — a live
+    form titled "Genability Signal Trial Sign Up" (HTTP 200, work email
+    required); (2) create or join an Organization at
+    https://dash.genability.com/org, with a "14-day free trial"; (3) create an
+    API Application at https://dash.genability.com/org/applications to mint an
+    appId and appKey — the docs state plainly: "If you are on a free trial, you
+    will need to enter a valid credit card to create an Application and get an
+    API Key"; (4) authenticate. No accreditation, no application review, no
+    licence agreement and no partner deal is required — but a payment instrument
+    is, so the data itself is never free-of-charge open data. Arcadia's own
+    marketing page (https://www.arcadia.com/platform) leads with "Request demo",
+    while the Genability dash retains the self-serve path.
+  authModel: >-
+    HTTP Basic authentication over TLS. appId is the username and appKey the
+    password: "Authenticate Arcadia Signal API requests with HTTP Basic
+    authentication using your appId and appKey"
+    (https://docs.arcadia.com/v2022-12-21-Signal/reference/authentication). The
+    harvested OpenAPI declares exactly one scheme —
+    components.securitySchemes.sec0 = {type: http, scheme: basic} — applied
+    globally via a root-level security requirement. No OAuth2, no OpenID Connect
+    and no mTLS. https://api.genability.com/.well-known/openid-configuration was
+    fetched anonymously and returned HTTP 401 (the generic API error envelope,
+    not an OIDC document), confirming no OIDC discovery is served.
+  rateLimits: >-
+    No numeric rate limit is published. Guidance only, at
+    https://docs.arcadia.com/v2022-12-21-Signal/docs/rate-limit-best-practices —
+    concurrency limits, an 8-10 minute gradual ramp-up, and a "Spike Limiter"
+    implementation pattern.
+
+corporateContext: >-
+  genability.com and www.genability.com both 301/302 to
+  https://www.arcadia.com/platform?utm_source=genability (HTTP 200 final).
+  developer.genability.com redirects to https://docs.arcadia.com/ (HTTP 200). The
+  GitHub organization https://github.com/Genability is named "Genability, now
+  part of Arcadia", located San Francisco, created 2011-04-13, 13 public repos.
+  The Genability brand survives in three live places: the API host
+  api.genability.com, the developer dashboard dash.genability.com, and the
+  ReadMe documentation version "v2022-12-21-Signal" branded "Arcadia Platform -
+  Signal". Arcadia itself is profiled separately at all/arcadia/ (Plug/Arc/Spark/
+  Bundle APIs); this repo covers only the Genability Signal surface, and the two
+  do not overlap in endpoints or host.
+
+harvest:
+  specs:
+  - path: openapi/genability-signal-openapi.json
+    title: signal
+    version: 2022-12-21-Signal
+    openapi: 3.1.0
+    server: https://api.genability.com
+    paths: 33
+    operations: 33
+    sourceURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-tariff
+    sourceHTTPStatus: 200
+    fetchDate: '2026-07-27'
+    method: >-
+      The complete OpenAPI 3.1.0 document is embedded verbatim in the ReadMe
+      reference page payload under the JSON key api.schema. It was extracted with
+      a JSON decoder and written out unmodified. Cross-checked against a second
+      reference page
+      (https://docs.arcadia.com/v2022-12-21-Signal/reference/calculate, HTTP 200)
+      — the two embedded schema objects compared byte-equal as parsed objects, so
+      this is the whole document, not a per-page fragment.
+    notes: >-
+      Contains one upstream defect preserved verbatim: the path key
+      "/GET /rest/v1/utilitytaxes" carries the HTTP method inside the path
+      string. The real request is GET https://api.genability.com/rest/v1/utilitytaxes.
+      The document also carries ReadMe's x-readme and x-readme-fauxas extensions,
+      which is how it was authored (manual endpoint editor), and it declares no
+      components.schemas — only securitySchemes.
+  probedNotSaved:
+  - url: https://dash.readme.com/api/v1/api-registry/48l4ufd11m1p91mmv
+    httpStatus: 200
+    finding: >-
+      ReadMe api-registry entry "signal.json" for the Signal version. A real
+      OpenAPI 3.1.0 document, server https://api.genability.com, basic auth — but
+      "paths": {} (zero operations). It is the registry shell for the same API and
+      adds nothing over the harvested 33-path document, so it was not saved.
+  - url: https://dash.readme.com/api/v1/api-registry/glsj40l9zxyy83
+    httpStatus: 200
+    finding: >-
+      One of four leftover "Genability API - Test" registry entries reachable from
+      the Cross Product docs version. Zero paths. NOT SAVED, deliberately: two of
+      these test documents embed what appear to be live appId:appKey credential
+      pairs (one as an apiKey scheme name, one as a Base64 Authorization header
+      value) in publicly fetchable ReadMe registry JSON. Recorded here as an
+      exposure observation only; no credential values are stored in this repo.
+  - url: https://api.genability.com/openapi.json
+    httpStatus: 401
+    finding: No self-hosted spec; the API returns its standard Unauthorized envelope.
+  - url: https://api.genability.com/swagger.json
+    httpStatus: 401
+    finding: No self-hosted spec.
+  - url: https://docs.arcadia.com/openapi.json
+    httpStatus: 404
+    finding: Not served.
+  - url: https://docs.arcadia.com/v2022-12-21-Signal/llms-full.txt
+    httpStatus: 404
+    finding: Only llms.txt (HTTP 200, 20,889 bytes) is published, not llms-full.txt.
+  - url: https://app.genability.com
+    httpStatus: 000
+    finding: DNS does not resolve.
+  - url: https://explorer.genability.com
+    httpStatus: 000
+    finding: DNS does not resolve.
+  - url: https://docs.genability.com
+    httpStatus: 000
+    finding: DNS does not resolve.
+
+probes:
+- url: https://genability.com
+  status: 200
+  note: Redirects to https://www.arcadia.com/platform?utm_source=genability
+- url: https://developer.genability.com
+  status: 200
+  note: Redirects to https://docs.arcadia.com/
+- url: https://api.genability.com
+  status: 401
+  note: Live API host; returns the JSON Unauthorized envelope naming propertyName appId.
+- url: https://api.genability.com/rest/public/tariffs
+  status: 401
+  note: >-
+    "public" in the path does not mean anonymous — credentials are required.
+- url: https://docs.arcadia.com/v2022-12-21-Signal/
+  status: 200
+  note: Developer documentation hub for Signal (ReadMe).
+- url: https://dash.genability.com/signup
+  status: 200
+  note: Live self-serve "Genability Signal Trial Sign Up" form.
+- url: https://dash.genability.com/login
+  status: 200
+  note: Customer/developer login. dash.genability.com/ redirects here.
+- url: https://dashboard.arcadia.com
+  status: 200
+  note: Arcadia customer sign-in (not the Genability developer path).
+- url: https://www.arcadia.com/platform
+  status: 200
+  note: Marketing page; leads with "Request demo"; no mention of Genability or Signal by name.
+- url: https://github.com/Genability
+  status: 200
+  note: '"Genability, now part of Arcadia" — San Francisco, 13 public repos, created 2011-04-13.'
+- url: https://www.linkedin.com/company/genability
+  status: 999
+  note: LinkedIn anti-bot response; URL retained in apis.yml but not independently confirmed.
+
+sources:
+- url: https://docs.arcadia.com/v2022-12-21-Signal/docs/quick-start
+  type: GettingStarted
+  note: Four-step self-serve onboarding, 14-day trial, credit card required for API keys.
+- url: https://docs.arcadia.com/v2022-12-21-Signal/reference/authentication
+  type: Authentication
+  note: HTTP Basic with appId/appKey; Echo Authenticate endpoint for validation.
+- url: https://docs.arcadia.com/v2022-12-21-Signal/llms.txt
+  type: LLMsTxt
+  note: Machine-readable index of all 103 Signal documentation pages; used for the standards sweep.
+- url: https://docs.arcadia.com/v2022-12-21-Signal/docs/find-customer-utility
+  type: Documentation
+  note: Coverage statement for USA, Canada and Mexico.
+- url: https://docs.arcadia.com/v2022-12-21-Signal/docs/rate-limit-best-practices
+  type: RateLimits
+  note: Qualitative concurrency and ramp-up guidance only.
+- url: https://github.com/Genability/genability-js
+  type: SDKs
+  note: >-
+    TypeScript/Node SDK (branch develop, last pushed 2026-02-02). Its README
+    still points at https://developer.genability.com/quick-start/ and it carries
+    client-side GraphQL type fragments (tariff-api-graphql.ts,
+    load-serving-entity-api-graphql.ts) — but no public GraphQL endpoint is
+    documented, so no GraphQL API is claimed here.
+- url: https://github.com/Genability/genability-java
+  type: SDKs
+  note: >-
+    Java client (last pushed 2026-04-17). Contains request classes for Accounts,
+    Profiles and Incentives — API areas that are NOT present in the current
+    33-path Signal contract. Treated as legacy SDK surface, not evidence of a
+    live documented API.
+- url: https://github.com/Genability/Genability-PHP-Library
+  type: SDKs
+  note: Legacy PHP library and examples.
+
+actions:
+  openapiHarvested: true
+  specsCount: 1
+  apisListed: 14
+  apisYmlCreated: true
+  githubRepoCreated: false
+  pushed: false
