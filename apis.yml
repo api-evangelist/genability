@@ -275,6 +275,8 @@ apis:
   - type: ErrorCatalog
     url: errors/genability-problem-types.yml
 common:
+- type: MCPServer
+  url: mcp/genability-mcp.yml
 - type: DomainSecurity
   url: security/genability-domain-security.yml
 - type: AgenticAccess
