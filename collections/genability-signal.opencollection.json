@@ -1,0 +1,1387 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "signal",
+    "version": "2022-12-21-Signal"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Echo Overview",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/echo/:error_code",
+        "params": [
+          {
+            "name": "errorCode",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Validate how you are calling the Arcadia APIs and debug request formatting, authentication, and input values."
+    },
+    {
+      "info": {
+        "name": "Echo Hello",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/echo/hello"
+      },
+      "docs": "Return a Hello World response when the passed-in credentials are valid or an unauthorized response when they are invalid."
+    },
+    {
+      "info": {
+        "name": "Simulate Errors",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/echo/errors",
+        "params": [
+          {
+            "name": "errorCode",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Simulate possible error messages to test how your application responds to API errors."
+    },
+    {
+      "info": {
+        "name": "Validate Authentication",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/echo/authenticate"
+      },
+      "docs": "Quickly validate the appId and appKey you are using. A successful response indicates they are valid."
+    },
+    {
+      "info": {
+        "name": "Validate Input Formats",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/echo/validate",
+        "params": [
+          {
+            "name": "dateTime",
+            "value": "",
+            "type": "query",
+            "description": "Validates the passed in string to the ISO 8601 format (e.g. the date and time you want to validate). See the example below for a valid format."
+          },
+          {
+            "name": "integer",
+            "value": "",
+            "type": "query",
+            "description": "Validates the passed in integer to validate it is recognized as an integer."
+          },
+          {
+            "name": "array",
+            "value": "",
+            "type": "query",
+            "description": "Validates the passed in array to validate it is in a recognized format."
+          }
+        ]
+      },
+      "docs": "Validate whether an input value is in a valid and recognized format, including dates, times, integers, and arrays."
+    },
+    {
+      "info": {
+        "name": "Calculate Cost",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.genability.com/rest/v1/ondemand/calculate",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run one on-demand cost calculation for a tariff, date range, and calculation inputs."
+    },
+    {
+      "info": {
+        "name": "Calculate Multiple Scenarios",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.genability.com/rest/v1/ondemand/calculate/mass",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run multiple on-demand calculation scenarios in one request."
+    },
+    {
+      "info": {
+        "name": "Get Smart Price",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/v1/prices/smart",
+        "params": [
+          {
+            "name": "fromDateTime",
+            "value": "",
+            "type": "query",
+            "description": "Start date and time to get prices for. (Optional, Defaults to \"now\".)"
+          },
+          {
+            "name": "toDateTime",
+            "value": "",
+            "type": "query",
+            "description": "End date and time to get prices for. (Optional, Defaults to fromDateTime plus 3 days.)"
+          },
+          {
+            "name": "masterTariffId",
+            "value": "",
+            "type": "query",
+            "description": "You can use this rather than a location (addressString or zipCode) and customer class. We will use the tariffs information to return its price, or in the case of a smart price request, its applicable Smart Tariffs price (Optional)"
+          },
+          {
+            "name": "zipCode or postCode",
+            "value": "",
+            "type": "query",
+            "description": "Recommended way to pass a location. Make sure it’s just the ZIP code or post code though. (Optional)"
+          },
+          {
+            "name": "country",
+            "value": "",
+            "type": "query",
+            "description": "Use when passing in a postCode or zipCode. Set to the ISO Country Code you require (Optional)"
+          },
+          {
+            "name": "addressString",
+            "value": "",
+            "type": "query",
+            "description": "An alternate to using postCode or zipCode and can be an address of any kind. Ideally this will contain a ZIP code or post code. (Optional)"
+          },
+          {
+            "name": "customerClass",
+            "value": "",
+            "type": "query",
+            "description": "Denotes the type of customer and is used to determine the appropriate tariff or smart tariff. (Optional) Defaults to \"RESIDENTIAL\""
+          },
+          {
+            "name": "endUse",
+            "value": "",
+            "type": "query",
+            "description": "Primarily used for smart tariffs. You can use this denote what end use (e.g. appliance, EV, whole home, thermostat etc) the price signal is for. (Optional). You can get the actual values that you can pass in from the property keys residentialEndUse and commercialEndUse"
+          },
+          {
+            "name": "groupBy",
+            "value": "",
+            "type": "query",
+            "description": "Use to specify the intervals you want the price changes back in. (Optional) When not passed in you get a change record for each actual change in price. Passing in \"HOUR\" will give hourly prices, even if the price doesn’t change."
+          },
+          {
+            "name": "territoryId",
+            "value": "",
+            "type": "query",
+            "description": "Rarely needed. This is the for when a tariff has different rates for different territories (so its not for a utility companies service area territory). Only needed when you want to override the default territory. (Optional)"
+          },
+          {
+            "name": "consumptionAmount",
+            "value": "",
+            "type": "query",
+            "description": "A monthly consumption in kWh. This is used for banded consumption to determine which pricing to use for the request. By default, the rate amount calculation assumes the highest banded level of consumption. (Optional)"
+          },
+          {
+            "name": "demandAmount",
+            "value": "",
+            "type": "query",
+            "description": "A monthly demand in kW. This is used for banded demand to determine which pricing to use for the request. By default, the rate amount calculation assumes the highest banded level of demand. (Optional)"
+          }
+        ]
+      },
+      "docs": "Retrieve marginal pricing for a location or tariff over a specified time window."
+    },
+    {
+      "info": {
+        "name": "List Tariffs",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/tariffs",
+        "params": [
+          {
+            "name": "lseId",
+            "value": "",
+            "type": "query",
+            "description": "Filter tariffs for a specific LSE"
+          },
+          {
+            "name": "masterTariffId",
+            "value": "",
+            "type": "query",
+            "description": "If specified, all versions of a tariff belonging to the master tariff Id are returned."
+          },
+          {
+            "name": "effectiveOn",
+            "value": "",
+            "type": "query",
+            "description": "Only tariffs that are effective on this date"
+          },
+          {
+            "name": "openOn",
+            "value": "",
+            "type": "query",
+            "description": "Only tariffs that were open (i.e. were not closed to new customers) on this date."
+          },
+          {
+            "name": "isActive",
+            "value": "",
+            "type": "query",
+            "description": "Only the current, active tariff version for the LSE or master tariff Id."
+          },
+          {
+            "name": "fromDateTime",
+            "value": "",
+            "type": "query",
+            "description": "Only include tariffs that are effective on or after this date"
+          },
+          {
+            "name": "toDateTime",
+            "value": "",
+            "type": "query",
+            "description": "Only include tariffs that are effective on or before this date"
+          },
+          {
+            "name": "customerClasses",
+            "value": "",
+            "type": "query",
+            "description": "Comma separated string that indicates the customer classes to include. Choices are: RESIDENTIAL, GENERAL, SPECIAL_USE"
+          },
+          {
+            "name": "chargeTypes",
+            "value": "",
+            "type": "query",
+            "description": "Comma separated string that indicates the charge types to include. Choices are: FIXED_PRICE, CONSUMPTION_BASED, DEMAND_BASED, QUANTITY, MINIMUM, TAX, NET_EXCESS_GENERATION"
+          },
+          {
+            "name": "tariffTypes",
+            "value": "",
+            "type": "query",
+            "description": "Comma separated string that indicates the tariff types to include. Choices are: DEFAULT, ALTERNATIVE, OPTIONAL_EXTRA, RIDER"
+          },
+          {
+            "name": "serviceTypes",
+            "value": "",
+            "type": "query",
+            "description": "Comma separated string that indicates the service types to include. Choices are: ELECTRICITY, SOLAR_PV, ‘GAS’ (default is all serviceTypes)"
+          },
+          {
+            "name": "privacyFlags",
+            "value": "",
+            "type": "query",
+            "description": "Comma separated string that indicates the privacy flags types to include. Only applicable if you publish private tariffs. Choices are: PUBLIC, UNLISTED, PRIVATE"
+          },
+          {
+            "name": "zipCode",
+            "value": "",
+            "type": "query",
+            "description": "(Optional but Recommended) Use this to return just the Tariffs that are for this given location. Most Tariffs apply for a regional, not national, geography."
+          },
+          {
+            "name": "postCode",
+            "value": "",
+            "type": "query",
+            "description": "Alias for zipCode. You can use either."
+          },
+          {
+            "name": "lat",
+            "value": "",
+            "type": "query",
+            "description": "(Optional) Represents the latitude of a geographical location. This should be paired with lng when not supplying a zip code or address."
+          },
+          {
+            "name": "lng",
+            "value": "",
+            "type": "query",
+            "description": "(Optional) Represents the longitude of a geographical location. This should be paired with lat when not supplying a zip code or address."
+          },
+          {
+            "name": "addressString",
+            "value": "",
+            "type": "query",
+            "description": "An alternative to using zipCode. Use this if you do not have the address parsed out in your app, but instead have a long string. For the best results this string will contain a zipcode or post code. If you do have the address split out it is better to use postCode."
+          },
+          {
+            "name": "riderId",
+            "value": "",
+            "type": "query",
+            "description": "When set to the masterTariffId of a Rider, this will return all of the tariffs that the rider is used on"
+          },
+          {
+            "name": "populateProperties",
+            "value": "",
+            "type": "query",
+            "description": "Populates the properties for the returned tariffs"
+          },
+          {
+            "name": "populateRates",
+            "value": "",
+            "type": "query",
+            "description": "Populates the rate details for the returned tariffs"
+          },
+          {
+            "name": "populateDocuments",
+            "value": "",
+            "type": "query",
+            "description": "Populates the document links for the returned tariffs"
+          },
+          {
+            "name": "consumption",
+            "value": "",
+            "type": "query",
+            "description": "Return tariffs which are eligible for this consumption amount"
+          },
+          {
+            "name": "demand",
+            "value": "",
+            "type": "query",
+            "description": "Return tariffs which are eligible for this demand amount"
+          },
+          {
+            "name": "hasNetMetering",
+            "value": "",
+            "type": "query",
+            "description": "Return tariffs which have or do not have any net metered tariff rates"
+          },
+          {
+            "name": "hasTimeOfUseRates",
+            "value": "",
+            "type": "query",
+            "description": "Return tariffs which have or do not have any time-of-use rates"
+          },
+          {
+            "name": "hasTieredRates",
+            "value": "",
+            "type": "query",
+            "description": "Return tariffs which have or do not have any tiered rates"
+          },
+          {
+            "name": "hasContractedRates",
+            "value": "",
+            "type": "query",
+            "description": "Return tariffs which have or do not have any contracted rates"
+          },
+          {
+            "name": "bundleRates",
+            "value": "",
+            "type": "query",
+            "description": "When true (false by default) the rates are summarized (bundled). Note that this only works for tariffs with a customerClass of RESIDENTIAL."
+          },
+          {
+            "name": "applicableRatesOnly",
+            "value": "",
+            "type": "query",
+            "description": "When true (false by default) rate applicability criteria will be applied to the rates. You’ll only get back rates that match the requests rate applicability values, or the default rate applicability value as set on the tariff."
+          },
+          {
+            "name": "filterRiderRates",
+            "value": "",
+            "type": "query",
+            "description": "Used in concert with populateRates = true, when filterRiderRates = true (false by default) rider rates will not be returned. However pointers to the riders will be returned. This is used primarily when using and existing tariff’s structure when creating private tariffs"
+          },
+          {
+            "name": "filterByApplicability",
+            "value": "",
+            "type": "query",
+            "description": "applies a rule that results should also be filtered by applicability (i.e., additional eligibility properties)."
+          },
+          {
+            "name": "applicabilityFilters[solarPvEligible]",
+            "value": "",
+            "type": "query",
+            "description": "which is the specific applicability criteria to filter by"
+          },
+          {
+            "name": "fields",
+            "value": "",
+            "type": "query",
+            "description": "ext to return extended fields"
+          }
+        ]
+      },
+      "docs": "Return tariffs matching the provided filters."
+    },
+    {
+      "info": {
+        "name": "Get Tariff History",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/tariffs/:masterTariffId/history",
+        "params": [
+          {
+            "name": "masterTariffId",
+            "value": "",
+            "type": "path",
+            "description": "Unique Arcadia ID that persists across all revisions of this tariff"
+          }
+        ]
+      },
+      "docs": "Return a complete history of tariff revisions for a given masterTariffId."
+    },
+    {
+      "info": {
+        "name": "List LSEs",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/lses",
+        "params": [
+          {
+            "name": "searchOn",
+            "value": "",
+            "type": "query",
+            "description": "This is from the standard searching and sorting parameters. You can search within one or more of the attributes within the LSE object (see above)."
+          },
+          {
+            "name": "zipCode",
+            "value": "",
+            "type": "query",
+            "description": "Zip or post code where you would like to see a list of LSEs for (e.g. 5 digit ZIP code for USA). Most countries have regional, not national, Utility Service Areas. When populating this field you should also populate country too. (Recommended)"
+          },
+          {
+            "name": "postCode",
+            "value": "",
+            "type": "query",
+            "description": "Alias for zipCode, you can use either."
+          },
+          {
+            "name": "country",
+            "value": "",
+            "type": "query",
+            "description": "Use an ISO Country Code when passing in a zipCode or postCode, and set it to the ISO Country Code of your zipCode or postCode since some countries use the same format"
+          },
+          {
+            "name": "ownerships",
+            "value": "",
+            "type": "query",
+            "description": "Filter results by the type of ownership structure for the LSE. Values include \"INVESTOR\", \"COOP\", \"MUNI\", but see ownership field above for complete list."
+          },
+          {
+            "name": "serviceTypes",
+            "value": "",
+            "type": "query",
+            "description": "Filter results to LSEs that just offer this service type to a customer class. Valid values include \"ELECTRICITY\" and \"SOLAR_PV\""
+          },
+          {
+            "name": "residentialServiceTypes",
+            "value": "",
+            "type": "query",
+            "description": "Filter results to LSEs that just offer this service type to their residential customers. Valid values include \"ELECTRICITY\" and \"SOLAR_PV\""
+          },
+          {
+            "name": "commercialServiceTypes",
+            "value": "",
+            "type": "query",
+            "description": "Filter results to LSEs that just offer this service type to their commercial (business) customers. Valid values include \"ELECTRICITY\" and \"SOLAR_PV\""
+          },
+          {
+            "name": "industrialServiceTypes",
+            "value": "",
+            "type": "query",
+            "description": "Filter results to LSEs that just offer this service type to their industrial customers. Valid values include \"ELECTRICITY\" and \"SOLAR_PV\""
+          },
+          {
+            "name": "transportationServiceTypes",
+            "value": "",
+            "type": "query",
+            "description": "Filter results to LSEs that just offer this service type to their transportation customers. Valid values include \"ELECTRICITY\" and \"SOLAR_PV\" (Optional)."
+          }
+        ]
+      },
+      "docs": "Return a full or filtered list of Load Serving Entities (LSEs)."
+    },
+    {
+      "info": {
+        "name": "Get LSE by ID",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/lses/:lseId",
+        "params": [
+          {
+            "name": "lseId",
+            "value": "",
+            "type": "path",
+            "description": "Unique Arcadia ID (primary key) for each LSE"
+          }
+        ]
+      },
+      "docs": "Return one Load Serving Entity (LSE) by lseId."
+    },
+    {
+      "info": {
+        "name": "List Territories",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/territories",
+        "params": [
+          {
+            "name": "zipCode",
+            "value": "",
+            "type": "query",
+            "description": "Filters the result to include only territories that this ZIP code is a part of."
+          },
+          {
+            "name": "postCode",
+            "value": "",
+            "type": "query",
+            "description": "Alias for zipCode, you can use either."
+          },
+          {
+            "name": "country",
+            "value": "",
+            "type": "query",
+            "description": "Recommended when passing in zipCode or postCode. We default this to US when zipCode or postCode is populated."
+          },
+          {
+            "name": "addressString",
+            "value": "",
+            "type": "query",
+            "description": "An address of any kind (e.g. San Francisco, CA, 94105, USA). Ideally this will contain a zipcode or post code, plus a country. Use this if you do not have the address parsed out in your app. If you do, its better to use postCode and country"
+          },
+          {
+            "name": "address",
+            "value": "",
+            "type": "query",
+            "description": "Alias for addressString, you can use either."
+          },
+          {
+            "name": "lat",
+            "value": "",
+            "type": "query",
+            "description": "(Optional) Represents the latitude of a geographical location. This should be paired with lng when not supplying a zip code or address."
+          },
+          {
+            "name": "lng",
+            "value": "",
+            "type": "query",
+            "description": "(Optional) Represents the longitude of a geographical location. This should be paired with lat when not supplying a zip code or address."
+          },
+          {
+            "name": "lseId",
+            "value": "",
+            "type": "query",
+            "description": "Filters the result set to only include territories within this LSE ID"
+          },
+          {
+            "name": "populateItems",
+            "value": "",
+            "type": "query",
+            "description": "If true, this returns a list of territory items for each territory in the result set."
+          },
+          {
+            "name": "masterTariffId",
+            "value": "",
+            "type": "query",
+            "description": "For tariffs with prices varying by geographic location, this will return the list of those territories covered by this tariff. 3% of all tariffs have territory based pricing and those are typically in CA, NY and MA. For the 97% of tariffs that do not have territory based pricing, the result set will be empty."
+          },
+          {
+            "name": "usageTypes",
+            "value": "",
+            "type": "query",
+            "description": "Result will include territories of the specified usageType. If not set the results will be limited to those of usage type \"SERVICE\" or \"TARIFF\"."
+          },
+          {
+            "name": "populateLses",
+            "value": "",
+            "type": "query",
+            "description": "If true, this returns a list of territory LSEs which are all the LSEs providing service in this territory."
+          },
+          {
+            "name": "containsItemType",
+            "value": "",
+            "type": "query",
+            "description": "Filters by the type of the territory items in each territory and must appear with containsItemValue. Possible values are: STATE, COUNTY, CITY, and ZIPCODE."
+          },
+          {
+            "name": "containsItemValue",
+            "value": "",
+            "type": "query",
+            "description": "Filters by the value of the territory items in each territory and must appear with containsItemType."
+          }
+        ]
+      },
+      "docs": "Return a full or filtered list of Territories."
+    },
+    {
+      "info": {
+        "name": "Get Territory by ID",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/territories/:territoryId",
+        "params": [
+          {
+            "name": "territoryId",
+            "value": "",
+            "type": "path",
+            "description": "Unique Arcadia ID (primary key) for each territory"
+          }
+        ]
+      },
+      "docs": "Return a Territory with the corresponding territoryId."
+    },
+    {
+      "info": {
+        "name": "List Season Groups",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/seasons",
+        "params": [
+          {
+            "name": "lseId",
+            "value": "",
+            "type": "query",
+            "description": "The LSE ID who’s seasons you want."
+          }
+        ]
+      },
+      "docs": "Return a list of season groups for a given LSE."
+    },
+    {
+      "info": {
+        "name": "Get TOU Group",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/timeofuses/:lseId/:touGroupId",
+        "params": [
+          {
+            "name": "lseId",
+            "value": "",
+            "type": "query",
+            "description": "Get a TOU group for a specific LSE"
+          },
+          {
+            "name": "touGroupId",
+            "value": "",
+            "type": "query",
+            "description": "Get a TOU group by its ID (required when LSE ID is provided)"
+          }
+        ]
+      },
+      "docs": "Return a Time of Use group by lseId and touGroupId."
+    },
+    {
+      "info": {
+        "name": "List TOU Group Intervals",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/timeofuses/:lseId/:touGroupId/intervals",
+        "params": [
+          {
+            "name": "lseId",
+            "value": "",
+            "type": "query",
+            "description": "Get a TOU group for a specific LSE"
+          },
+          {
+            "name": "touGroupId",
+            "value": "",
+            "type": "query",
+            "description": "Get a TOU group by its ID (required when LSE ID is provided)"
+          }
+        ]
+      },
+      "docs": "Return intervals for a Time of Use group by lseId and touGroupId."
+    },
+    {
+      "info": {
+        "name": "Get TOU by ID",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/timeofuses/:touId",
+        "params": [
+          {
+            "name": "touId",
+            "value": "",
+            "type": "path",
+            "description": "Unique Arcadia ID (primary key) for each time of use. This is unique across all LSEs."
+          }
+        ]
+      },
+      "docs": "Return a single Time of Use definition by touId."
+    },
+    {
+      "info": {
+        "name": "List TOU Intervals",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/timeofuses/intervals/:touId",
+        "params": [
+          {
+            "name": "touId",
+            "value": "",
+            "type": "path",
+            "description": "Unique Arcadia ID (primary key) for each time of use. This is unique across all LSEs."
+          }
+        ]
+      },
+      "docs": "Return intervals for a specific Time of Use definition by touId."
+    },
+    {
+      "info": {
+        "name": "Create Private TOU Definition",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.genability.com/rest/timeofuses"
+      },
+      "docs": "Creating a private TOU definition requires special API permissions. Contact platformsupport@arcadia.com to request access."
+    },
+    {
+      "info": {
+        "name": "List Calendars",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/calendars/",
+        "params": [
+          {
+            "name": "lseId",
+            "value": "",
+            "type": "query",
+            "description": "Load serving entity id"
+          },
+          {
+            "name": "calendarType",
+            "value": "",
+            "type": "query",
+            "description": "Type of calendar. Can be either HOLIDAY, BILLING, or PRICING_PERIOD (Optional)."
+          },
+          {
+            "name": "fromDateTime",
+            "value": "",
+            "type": "query",
+            "description": "from date (Optional)"
+          },
+          {
+            "name": "toDateTime",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Return full or filtered calendar definitions for a utility, including holiday, billing, and pricing period calendars."
+    },
+    {
+      "info": {
+        "name": "Get Calendar by ID",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/calendars/:calendarId",
+        "params": [
+          {
+            "name": "calendarId",
+            "value": "",
+            "type": "path",
+            "description": "A unique ID for each calendar"
+          },
+          {
+            "name": "fromDateTime",
+            "value": "",
+            "type": "query",
+            "description": "from date (Optional)"
+          },
+          {
+            "name": "toDateTime",
+            "value": "",
+            "type": "query",
+            "description": "from date (Optional)"
+          }
+        ]
+      },
+      "docs": "Return one Calendar and its event definitions by calendarId."
+    },
+    {
+      "info": {
+        "name": "List Calendar Dates",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/calendars/dates",
+        "params": [
+          {
+            "name": "calendarId",
+            "value": "",
+            "type": "query",
+            "description": "Optionally return only dates for a given calendar."
+          },
+          {
+            "name": "lseId",
+            "value": "",
+            "type": "query",
+            "description": "Optional filter for a given utility. Since calendars belong to LSEs, you don’t need to send this if sending calendarId."
+          },
+          {
+            "name": "locale",
+            "value": "",
+            "type": "query",
+            "description": "Optional ISO country code of the locale you are interested in (e.g. US)."
+          },
+          {
+            "name": "fromDateTime",
+            "value": "",
+            "type": "query",
+            "description": "Event dates on or after this date (Optional)."
+          },
+          {
+            "name": "toDateTime",
+            "value": "",
+            "type": "query",
+            "description": "Event dates on or before this date (Optional)."
+          },
+          {
+            "name": "calendarEventTypes",
+            "value": "",
+            "type": "query",
+            "description": "Comma separated string that indicates the calendar event types to include. Choices are: HOLIDAY, BILLING, PRICING_PERIOD (Optional)."
+          },
+          {
+            "name": "dateDefinitionTypes",
+            "value": "",
+            "type": "query",
+            "description": "Comma separated string that indicates the date definition types to include. Choices are: FIXED_DATE, MANUAL, FLOATING_DATE, EASTER_DATE (Optional)."
+          }
+        ]
+      },
+      "docs": "Return actual dates for calendar events, filtered by calendar, utility, locale, date range, event type, or date definition type."
+    },
+    {
+      "info": {
+        "name": "List Properties",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/properties",
+        "params": [
+          {
+            "name": "dataType",
+            "value": "",
+            "type": "query",
+            "description": "Filters the result set to only include properties that have the specified dataType"
+          },
+          {
+            "name": "family",
+            "value": "",
+            "type": "query",
+            "description": "Filters the result by the family. Examples of family include \"billing\", \"metering\" and \"connection\". Look at the properties to see more examples of the family"
+          },
+          {
+            "name": "keySpace",
+            "value": "",
+            "type": "query",
+            "description": "Filters the result by the key space. Possible values include \"electricity\" and \"solarPv\""
+          },
+          {
+            "name": "entityId",
+            "value": "",
+            "type": "query",
+            "description": "Filters the result set to only include properties that belong to this entityId. entityType must also be specified, otherwise this is ignored"
+          },
+          {
+            "name": "entityType",
+            "value": "",
+            "type": "query",
+            "description": "Filters the result set to only include properties that belong to this entityType. entityId must also be specified, otherwise this is ignored. Currently the only supported value is \"LSE\""
+          },
+          {
+            "name": "excludeGlobal",
+            "value": "",
+            "type": "query",
+            "description": "Filters the result set to only include entity specific properties."
+          }
+        ]
+      },
+      "docs": "Return a list of Property Keys and sub-property keys based on search criteria."
+    },
+    {
+      "info": {
+        "name": "Get Property by Key",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/properties/:keyName",
+        "params": [
+          {
+            "name": "keyName",
+            "value": "",
+            "type": "path",
+            "description": "The unique name for this property."
+          }
+        ]
+      },
+      "docs": "Return one Property Key by keyName."
+    },
+    {
+      "info": {
+        "name": "Get Utility Taxes",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/GET /rest/v1/utilitytaxes",
+        "params": [
+          {
+            "name": "territoryId",
+            "value": "",
+            "type": "query",
+            "description": "Arcadia ID of the Territory covered by the utility tax."
+          },
+          {
+            "name": "customerClasses",
+            "value": "",
+            "type": "query",
+            "description": "A customer class specification can be one or more of RESIDENTIAL, GENERAL, or SPECIAL_USE"
+          },
+          {
+            "name": "fromDateTime",
+            "value": "",
+            "type": "query",
+            "description": "The date when the utility tax became or will become effective."
+          },
+          {
+            "name": "toDateTime",
+            "value": "",
+            "type": "query",
+            "description": "The date when the utility tax expires."
+          },
+          {
+            "name": "lseId",
+            "value": "",
+            "type": "query",
+            "description": "Arcadia ID of the utility associated with one or more utility taxes."
+          },
+          {
+            "name": "searchOn",
+            "value": "",
+            "type": "query",
+            "description": "A comma separated list of fields to search on. Currently one of utilityTaxId, taxName, or location"
+          },
+          {
+            "name": "search",
+            "value": "",
+            "type": "query",
+            "description": "The value to search for in the utility taxes."
+          },
+          {
+            "name": "sortOn",
+            "value": "",
+            "type": "query",
+            "description": "A comma separated list off fields to search on. Currently one of utilityTaxId, taxName, rateAmountElectricity, rateAmountGas, fromDateTime or toDateTime."
+          },
+          {
+            "name": "sortOrder",
+            "value": "",
+            "type": "query",
+            "description": "ASC for ascending or DESC for descending."
+          }
+        ]
+      },
+      "docs": "Retrieve a list of Utility Taxes"
+    },
+    {
+      "info": {
+        "name": "Get One Utility Tax",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/v1/utilitytaxes/:utilityTaxId",
+        "params": [
+          {
+            "name": "utilityTaxId",
+            "value": "",
+            "type": "path",
+            "description": "Arcadia ID of the Utility Tax"
+          }
+        ]
+      },
+      "docs": "Get One Utility Tax"
+    },
+    {
+      "info": {
+        "name": "List Lookup Values",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/properties/:keyName/lookups",
+        "params": [
+          {
+            "name": "keyName",
+            "value": "",
+            "type": "query",
+            "description": "Property key name"
+          },
+          {
+            "name": "subKeyName",
+            "value": "",
+            "type": "query",
+            "description": "Subproperty key name"
+          },
+          {
+            "name": "fromDateTime",
+            "value": "",
+            "type": "query",
+            "description": "Date range - from value"
+          },
+          {
+            "name": "toDateTime",
+            "value": "",
+            "type": "query",
+            "description": "Date range - to value"
+          },
+          {
+            "name": "keyName",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Return lookup table values for a LOOKUP Property Key."
+    },
+    {
+      "info": {
+        "name": "Get Lookup Stats",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/properties/:propertyKey/stats",
+        "params": [
+          {
+            "name": "propertyKey",
+            "value": "",
+            "type": "path",
+            "description": "Property key name."
+          }
+        ]
+      },
+      "docs": "Return summary statistics for a LOOKUP Property Key."
+    },
+    {
+      "info": {
+        "name": "Get Best Typical Baseline",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/v1/typicals/baselines/best",
+        "params": [
+          {
+            "name": "zipCode",
+            "value": "",
+            "type": "query",
+            "description": "The zip code or postal code we will use to look up local buildings."
+          },
+          {
+            "name": "country",
+            "value": "",
+            "type": "query",
+            "description": "The ISO country code. Use in conjunction with zipCode | postCode parameters."
+          },
+          {
+            "name": "addressString",
+            "value": "",
+            "type": "query",
+            "description": "The address string we will geo-tag (isolate latitude & longitude) to look up local buildings."
+          },
+          {
+            "name": "lat",
+            "value": "",
+            "type": "query",
+            "description": "Latitude to look up. Use in concert with lng if you choose this method."
+          },
+          {
+            "name": "lng",
+            "value": "",
+            "type": "query",
+            "description": "Longitude to look up. Use in concert with lat if you choose this method."
+          },
+          {
+            "name": "customerClass",
+            "value": "",
+            "type": "query",
+            "description": "The class of customer, which is one of RESIDENTIAL, GENERAL, or SPECIAL_USE."
+          },
+          {
+            "name": "buildingType",
+            "value": "",
+            "type": "query",
+            "description": "The building type that best describes this building. Use RESIDENTIAL for a residential default or one of the more explicit choices returned from the property key buildingTypeResidential or buildingTypeCommercial."
+          },
+          {
+            "name": "serviceType",
+            "value": "",
+            "type": "query",
+            "description": "This is currently limited to ELECTRICITY."
+          },
+          {
+            "name": "buildingArea",
+            "value": "",
+            "type": "query",
+            "description": "If you have the site footprint, pass in size of the building in square feet. If this is not passed directly we will default to the average for the region and buildingType."
+          },
+          {
+            "name": "buildingVintage",
+            "value": "",
+            "type": "query",
+            "description": "The construction year of the building, options include Pre1980, Post1980 (1980 - 2003), or New (2003+)."
+          },
+          {
+            "name": "excludeMeasures",
+            "value": "",
+            "type": "query",
+            "description": "Setting to true will omit the measures (makes the call faster if you don't need this data). Defaults to false."
+          },
+          {
+            "name": "measuresUnit",
+            "value": "",
+            "type": "query",
+            "description": "By default, we will return total usage per interval. If you ask for intensity we'll convert this into energy intensity (e.g. per square foot or meter). Your final choice is proportion which means that each value in the year will add up to 100."
+          },
+          {
+            "name": "groupBy",
+            "value": "",
+            "type": "query",
+            "description": "When supplied the response will roll up measures into this period. Possible values are MONTH, DAY, YEAR."
+          },
+          {
+            "name": "sizingKeyName",
+            "value": "",
+            "type": "query",
+            "description": "Pass this parameter when you want to adjust the size of the load. Currently supports loadSize. Used in concert with sizingDataValue and sizingUnit."
+          },
+          {
+            "name": "sizingDataValue",
+            "value": "",
+            "type": "query",
+            "description": "This should be set to the quantity to size (e.g. 12000 for 12,000 kWh). (See sizingKeyName above)"
+          },
+          {
+            "name": "sizingUnit",
+            "value": "",
+            "type": "query",
+            "description": "This denotes the unit of measure for the accompanying sizingDataValue. Currently, we support only kWh. (See sizingKeyName above)"
+          },
+          {
+            "name": "intervalFromDateTime",
+            "value": "",
+            "type": "query",
+            "description": "Pass this parameter when you want the \"intervals\" to be populated from a certain date (e.g. 2024-01-01)."
+          },
+          {
+            "name": "intervalToDateTime",
+            "value": "",
+            "type": "query",
+            "description": "Pass this parameter when you want the \"intervals\" to be populated to a certain date (e.g. 2025-01-01)."
+          }
+        ]
+      },
+      "docs": "Retrieve the baseline that best fits the provided location, building type, and optional building details."
+    },
+    {
+      "info": {
+        "name": "Get ZIP Code Details",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/zipcodes/:zipCode",
+        "params": [
+          {
+            "name": "zipCode",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve details for a ZIP code, including city, county, latitude, longitude, and time zone information."
+    },
+    {
+      "info": {
+        "name": "Get Organization Usage",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/v1/orgs/usage",
+        "params": [
+          {
+            "name": "populateAggregateUsage",
+            "value": "",
+            "type": "query",
+            "description": "Boolean flag to indicate whether to include aggregate usage data in the response."
+          },
+          {
+            "name": "populateChildOrgs",
+            "value": "",
+            "type": "query",
+            "description": "Boolean flag to determine if usage data for child organizations should be included."
+          },
+          {
+            "name": "populateMasterTariffIds",
+            "value": "",
+            "type": "query",
+            "description": "Boolean flag to specify whether to include master tariff IDs in the response."
+          },
+          {
+            "name": "startYearMonth",
+            "value": "",
+            "type": "query",
+            "description": "Date flag to filter usage to a specific range at a monthly granularity. ISO formatting. Used in combination with endYearMonth."
+          },
+          {
+            "name": "endYearMonth",
+            "value": "",
+            "type": "query",
+            "description": "Date flag to filter usage to a specific range at a monthly granularity. ISO formatting. Used in combination with startYearMonth."
+          }
+        ]
+      },
+      "docs": "Retrieve month-to-date API usage statistics for your organization."
+    },
+    {
+      "info": {
+        "name": "Get Tariff by MTID",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.genability.com/rest/public/tariffs/:masterTariffId",
+        "params": [
+          {
+            "name": "effectiveOn",
+            "value": "",
+            "type": "query",
+            "description": "Only tariffs that are effective on this date"
+          },
+          {
+            "name": "openOn",
+            "value": "",
+            "type": "query",
+            "description": "Only tariffs that were open (i.e. were not closed to new customers) on this date."
+          },
+          {
+            "name": "isActive",
+            "value": "",
+            "type": "query",
+            "description": "Only the current, active tariff version for the LSE or master tariff Id."
+          },
+          {
+            "name": "fromDateTime",
+            "value": "",
+            "type": "query",
+            "description": "Only include tariffs that are effective on or after this date"
+          },
+          {
+            "name": "toDateTime",
+            "value": "",
+            "type": "query",
+            "description": "Only include tariffs that are effective on or before this date"
+          },
+          {
+            "name": "populateProperties",
+            "value": "",
+            "type": "query",
+            "description": "Populates the properties for the returned tariffs"
+          },
+          {
+            "name": "populateRates",
+            "value": "",
+            "type": "query",
+            "description": "Populates the rate details for the returned tariffs"
+          },
+          {
+            "name": "populateDocuments",
+            "value": "",
+            "type": "query",
+            "description": "Populates the document links for the returned tariffs"
+          },
+          {
+            "name": "bundleRates",
+            "value": "",
+            "type": "query",
+            "description": "When true (false by default) the rates are summarized (bundled). Note that this only works for tariffs with a customerClass of RESIDENTIAL."
+          },
+          {
+            "name": "applicableRatesOnly",
+            "value": "",
+            "type": "query",
+            "description": "When true (false by default) rate applicability criteria will be applied to the rates. You’ll only get back rates that match the requests rate applicability values, or the default rate applicability value as set on the tariff."
+          },
+          {
+            "name": "filterRiderRates",
+            "value": "",
+            "type": "query",
+            "description": "Used in concert with populateRates = true, when filterRiderRates = true (false by default) rider rates will not be returned. However pointers to the riders will be returned. This is used primarily when using and existing tariff’s structure when creating private tariffs"
+          },
+          {
+            "name": "fields",
+            "value": "",
+            "type": "query",
+            "description": "ext to return extended fields"
+          },
+          {
+            "name": "masterTariffId",
+            "value": "",
+            "type": "path",
+            "description": "If specified, all versions of a tariff belonging to the master tariff Id are returned."
+          }
+        ]
+      },
+      "docs": "Return tariffs matching the provided filters."
+    }
+  ],
+  "bundled": true
+}

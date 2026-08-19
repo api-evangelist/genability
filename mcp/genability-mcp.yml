@@ -148,3 +148,8 @@ candidate_tools:
   description: Get Tariff by MTID
   maps_to: GET /rest/public/tariffs/{masterTariffId}
   source_operation: openapi/genability-signal-openapi.json#get-tariff-1
+deployment:
+  mode: none
+  verified: derived
+  checked: '2026-08-12'
+  source: catalog MCP census
