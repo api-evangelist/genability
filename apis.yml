@@ -139,6 +139,9 @@ apis:
   humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/time-of-use-tou
   baseURL: https://api.genability.com
   tags:
+  - Time-Of-Use
+  - Energy Rates
+  tags_raw:
   - Time of Use
   - Energy Rates
   properties:
