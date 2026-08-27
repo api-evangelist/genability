@@ -37,240 +37,100 @@ created: '2026-07-27'
 modified: '2026-07-27'
 specificationVersion: '0.23'
 apis:
-- aid: genability:genability-signal-tariff-api
-  name: Genability Signal Tariff API
-  description: >-
-    Search and retrieve North American electricity tariffs, including rate
-    structures, applicability properties, documents and the effective-dated
-    history of a master tariff. The list endpoint exposes 33 documented query
-    parameters for filtering by utility, territory, customer class, service type,
-    tariff type and effective date.
+- aid: genability:genability-get-api
+  name: Genability GET API
+  description: The GET API from Genability — 1 operation(s) for get.
   humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/tariff
   baseURL: https://api.genability.com
   tags:
-  - Tariffs
-  - Energy Rates
-  - Electricity
+  - GET
   properties:
   - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
+    url: openapi/genability-get-api-openapi.yml
   - type: Documentation
     url: https://docs.arcadia.com/v2022-12-21-Signal/docs/find-utilities-and-tariffs
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-tariff
   - type: Authentication
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/authentication
-- aid: genability:genability-signal-load-serving-entity-api
-  name: Genability Signal Load Serving Entity API
-  description: >-
-    List and retrieve Load Serving Entities (LSEs) — the investor-owned
-    utilities, municipal utilities and cooperatives that serve electricity across
-    the USA, Canada and Mexico — searchable by postal code, name or utility code.
-  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/load-serving-entities-lses
-  baseURL: https://api.genability.com
-  tags:
-  - Utilities
-  - Electricity
-  properties:
-  - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
   - type: Documentation
     url: https://docs.arcadia.com/v2022-12-21-Signal/docs/find-customer-utility
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-lses
-- aid: genability:genability-signal-territory-api
-  name: Genability Signal Territory API
-  description: >-
-    List and retrieve territories — the service, baseline, climate and tariff
-    applicability geographies that a utility uses to scope which rates apply to a
-    given premise.
-  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/territory
-  baseURL: https://api.genability.com
-  tags:
-  - Territories
-  - Utilities
-  properties:
-  - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-territories
-- aid: genability:genability-signal-cost-calculation-api
-  name: Genability Signal Cost Calculation API
-  description: >-
-    On-demand bill calculation against any North American tariff. Post a usage
-    scenario and receive a modeled cost breakdown, or use the mass calculation
-    endpoint to price many scenarios in one request for savings analysis, bill
-    auditing and rate comparison.
-  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/calculation-apis
-  baseURL: https://api.genability.com
-  tags:
-  - Cost Modeling
-  - Energy Rates
-  - Billing
-  properties:
-  - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/calculate
   - type: Documentation
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/on-demand-mass-calculation
-- aid: genability:genability-signal-smart-price-api
-  name: Genability Signal Smart Price API
-  description: >-
-    Returns a single blended price signal ($/kWh) for a utility, tariff and time
-    window, for use in dispatch logic, EV charging schedules and consumer-facing
-    price displays.
-  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/smart-price
-  baseURL: https://api.genability.com
-  tags:
-  - Energy Rates
-  - Pricing
-  properties:
-  - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/smart-price-api
-- aid: genability:genability-signal-time-of-use-api
-  name: Genability Signal Time of Use API
-  description: >-
-    Retrieve time-of-use (TOU) groups, TOU definitions and their interval
-    schedules for a utility, and create private TOU definitions scoped to your
-    own organization.
-  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/time-of-use-tou
-  baseURL: https://api.genability.com
-  tags:
-  - Time-Of-Use
-  - Energy Rates
-  tags_raw:
-  - Time of Use
-  - Energy Rates
-  properties:
-  - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-tou-group
-- aid: genability:genability-signal-calendar-api
-  name: Genability Signal Calendar API
-  description: >-
-    List calendars and calendar dates — the holiday and special-day schedules
-    that determine which rate periods apply on a given date under a tariff.
-  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/calendar
-  baseURL: https://api.genability.com
-  tags:
-  - Calendars
-  - Energy Rates
-  properties:
-  - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-calendars
-- aid: genability:genability-signal-season-api
-  name: Genability Signal Season API
-  description: >-
-    List season groups, the seasonal definitions a utility applies when a tariff
-    prices summer and winter usage differently.
-  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/season
-  baseURL: https://api.genability.com
-  tags:
-  - Seasons
-  - Energy Rates
-  properties:
-  - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-season
-- aid: genability:genability-signal-property-and-lookup-api
-  name: Genability Signal Property and Lookup API
-  description: >-
-    List and retrieve property keys — the typed inputs a tariff calculation
-    accepts — along with their permitted lookup values and usage statistics, so a
-    client can discover exactly what a given rate needs before pricing it.
-  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/properties
-  baseURL: https://api.genability.com
-  tags:
-  - Metadata
-  - Energy Rates
-  properties:
-  - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/properties-api
   - type: Documentation
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/lookups
-- aid: genability:genability-signal-typical-baseline-api
-  name: Genability Signal Typical Baseline API
-  description: >-
-    Returns a best-fit typical usage baseline — a modeled hourly or monthly load
-    profile — for a location and building type, used when real interval data for
-    a customer is not available.
-  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/typical-baseline
-  baseURL: https://api.genability.com
-  tags:
-  - Load Profiles
-  - Usage Modeling
-  properties:
-  - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/typical-baseline-api
-- aid: genability:genability-signal-zip-code-api
-  name: Genability Signal ZIP Code API
-  description: >-
-    Retrieve details for a ZIP code, including the utilities and territories that
-    serve it, as the entry point for identifying a customer's tariff from an
-    address.
-  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/zip-code
-  baseURL: https://api.genability.com
-  tags:
-  - Geography
-  - Utilities
-  properties:
-  - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/zip-code-api
-- aid: genability:genability-signal-utility-tax-api
-  name: Genability Signal Utility Tax API
-  description: >-
-    List and retrieve the utility taxes that apply to an electricity bill by
-    jurisdiction, so a modeled bill reflects the taxes a customer actually pays.
-  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/tariff-rate-components-overview
-  baseURL: https://api.genability.com
-  tags:
-  - Taxes
-  - Billing
-  properties:
-  - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
-- aid: genability:genability-signal-organization-usage-api
-  name: Genability Signal Organization Usage API
-  description: >-
-    Reports your own organization's Signal API consumption, the metering surface
-    behind Genability's subscription billing.
-  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/organization-usage
-  baseURL: https://api.genability.com
-  tags:
-  - Usage Metering
-  - Account
-  properties:
-  - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/organization-usage-api
-- aid: genability:genability-signal-echo-api
-  name: Genability Signal Echo API
-  description: >-
-    Testing and debugging endpoints that validate credentials, echo a hello
-    response, simulate error codes and validate input formats before a client
-    calls the priced endpoints.
-  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/echo-summary
+  - type: APIReference
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/echo
+  - type: Sandbox
+    url: sandbox/genability-sandbox.yml
+  - type: ErrorCatalog
+    url: errors/genability-problem-types.yml
+- aid: genability:genability-rest-api
+  name: Genability Rest API
+  description: The Rest API from Genability — 32 operation(s) for rest.
+  humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/tariff
   baseURL: https://api.genability.com
   tags:
-  - Testing
-  - Sandbox
+  - Rest
   properties:
   - type: OpenAPI
-    url: openapi/genability-signal-openapi.json
+    url: openapi/genability-rest-api-openapi.yml
+  - type: Documentation
+    url: https://docs.arcadia.com/v2022-12-21-Signal/docs/find-utilities-and-tariffs
+  - type: APIReference
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-tariff
+  - type: Authentication
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/authentication
+  - type: Documentation
+    url: https://docs.arcadia.com/v2022-12-21-Signal/docs/find-customer-utility
+  - type: APIReference
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-lses
+  - type: APIReference
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-territories
+  - type: APIReference
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/calculate
+  - type: Documentation
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/on-demand-mass-calculation
+  - type: APIReference
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/smart-price-api
+  - type: APIReference
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-tou-group
+  - type: APIReference
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-calendars
+  - type: APIReference
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/get-season
+  - type: APIReference
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/properties-api
+  - type: Documentation
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/lookups
+  - type: APIReference
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/typical-baseline-api
+  - type: APIReference
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/zip-code-api
+  - type: APIReference
+    url: https://docs.arcadia.com/v2022-12-21-Signal/reference/organization-usage-api
   - type: APIReference
     url: https://docs.arcadia.com/v2022-12-21-Signal/reference/echo
   - type: Sandbox
