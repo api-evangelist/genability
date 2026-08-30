@@ -54,7 +54,8 @@ apis:
   description: The GET API from Genability — 1 operation(s) for get.
   humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/tariff
   baseURL: https://api.genability.com
-  tags:
+  tags: []
+  tags_raw:
   - GET
   properties:
   - type: OpenAPI
@@ -105,6 +106,8 @@ apis:
   humanURL: https://docs.arcadia.com/v2022-12-21-Signal/reference/tariff
   baseURL: https://api.genability.com
   tags:
+  - REST
+  tags_raw:
   - Rest
   properties:
   - type: OpenAPI
