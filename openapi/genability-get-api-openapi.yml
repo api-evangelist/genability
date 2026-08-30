@@ -1,0 +1,106 @@
+openapi: 3.2.0
+info:
+  title: signal GET API
+  version: 2022-12-21-Signal
+servers:
+- url: https://api.genability.com
+security:
+- sec0: []
+tags:
+- name: GET
+paths:
+  /GET /rest/v1/utilitytaxes:
+    get:
+      summary: Get Utility Taxes
+      description: Retrieve a list of Utility Taxes
+      operationId: get-utility-taxes
+      parameters:
+      - name: territoryId
+        in: query
+        description: Arcadia ID of the Territory covered by the utility tax.
+        schema:
+          type: integer
+          format: int32
+      - name: customerClasses
+        in: query
+        description: A customer class specification can be one or more of RESIDENTIAL, GENERAL, or SPECIAL_USE
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromDateTime
+        in: query
+        description: The date when the utility tax became or will become effective.
+        schema:
+          type: string
+          format: date
+      - name: toDateTime
+        in: query
+        description: The date when the utility tax expires.
+        schema:
+          type: string
+          format: date
+      - name: lseId
+        in: query
+        description: Arcadia ID of the utility associated with one or more utility taxes.
+        schema:
+          type: integer
+          format: int32
+      - name: searchOn
+        in: query
+        description: A comma separated list of fields to search on. Currently one of utilityTaxId, taxName, or location
+        schema:
+          type: array
+          items:
+            type: string
+      - name: search
+        in: query
+        description: The value to search for in the utility taxes.
+        schema:
+          type: string
+      - name: sortOn
+        in: query
+        description: A comma separated list off fields to search on. Currently one of utilityTaxId, taxName, rateAmountElectricity, rateAmountGas, fromDateTime or toDateTime.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: sortOrder
+        in: query
+        description: ASC for ascending or DESC for descending.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - GET
+components:
+  securitySchemes:
+    sec0:
+      type: http
+      scheme: basic
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true
