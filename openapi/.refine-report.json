@@ -1,0 +1,57 @@
+{
+  "provider": "genability",
+  "sources": [
+    "_original/genability-signal-openapi.json"
+  ],
+  "outputs": [
+    "genability-get-api-openapi.yml",
+    "genability-rest-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "genability-signal-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "genability-signal-openapi.json: tagged paths GET /rest/echo/{error_code} -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/echo/hello -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/echo/errors -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/echo/authenticate -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/echo/validate -> Rest",
+    "genability-signal-openapi.json: tagged paths POST /rest/v1/ondemand/calculate -> Rest",
+    "genability-signal-openapi.json: tagged paths POST /rest/v1/ondemand/calculate/mass -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/v1/prices/smart -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/tariffs -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/tariffs/{masterTariffId}/history -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/lses -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/lses/{lseId} -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/territories -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/territories/{territoryId} -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/seasons -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/timeofuses/{lseId}/{touGroupId} -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/timeofuses/{lseId}/{touGroupId}/intervals -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/timeofuses/{touId} -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/timeofuses/intervals/{touId} -> Rest",
+    "genability-signal-openapi.json: tagged paths POST /rest/timeofuses -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/calendars/ -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/calendars/{calendarId} -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/calendars/dates -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/properties -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/properties/{keyName} -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /GET /rest/v1/utilitytaxes -> GET",
+    "genability-signal-openapi.json: tagged paths GET /rest/v1/utilitytaxes/{utilityTaxId} -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/properties/{keyName}/lookups -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/properties/{propertyKey}/stats -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/v1/typicals/baselines/best -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/zipcodes/{zipCode} -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/v1/orgs/usage -> Rest",
+    "genability-signal-openapi.json: tagged paths GET /rest/public/tariffs/{masterTariffId} -> Rest",
+    "genability-signal-openapi.json: declared missing tag: GET",
+    "genability-signal-openapi.json: declared missing tag: Rest",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "genability-get-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "genability-rest-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

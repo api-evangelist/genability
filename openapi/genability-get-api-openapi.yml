@@ -7,7 +7,7 @@ servers:
 security:
 - sec0: []
 tags:
-- name: GET
+- name: Get
 paths:
   /GET /rest/v1/utilitytaxes:
     get:
@@ -93,7 +93,7 @@ paths:
                 properties: {}
       deprecated: false
       tags:
-      - GET
+      - Get
 components:
   securitySchemes:
     sec0:
